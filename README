@@ -1,18 +1,13 @@
-CyanogenMod 7 For Samsung Galaxy Y (Totoro)
+Cyanogenmod 10 for Galaxy Fame (S6810/p)
 
-
-vivekkalady
-
-
+Credits Corsicanu and adytzu33
+Adytzu33 for the base cm10 sourcecode which needed to be edited a bit.
+Corsicanu for providing the cm10 sourcecode from Adytzu33 who never comes on xda anymore and helping on the latest error and fixing the build
+boardconfig.mk and recovery.fstab
 
 README
 
-the final output will be a zip file located at out/target/product/totoro 
-
-open that file and delete boot.img and recovery folder and also modify the updater-script for applying this to phone.
-
-our
-or you can use the system.img from the same folder and create a flashable zip yourself
+the final output will be a zip file located at out/target/product/nevisp
 
 
 
