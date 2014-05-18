@@ -1,0 +1,21 @@
+CyanogenMod 7 For Samsung Galaxy Y (Totoro)
+
+
+vivekkalady
+
+
+
+README
+
+the final output will be a zip file located at out/target/product/totoro 
+
+open that file and delete boot.img and recovery folder and also modify the updater-script for applying this to phone.
+
+our
+or you can use the system.img from the same folder and create a flashable zip yourself
+
+
+
+
+
+

@@ -1,0 +1,84 @@
+on early-init
+    start ueventd
+
+on init
+    export PATH /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
+    export ANDROID_ROOT /system
+    export ANDROID_DATA /data
+    export EXTERNAL_STORAGE /sdcard0
+    export SECONDARY_STORAGE /sdcard1
+
+    symlink /system/etc /etc
+
+    mkdir /sdcard0
+    mkdir /sdcard1
+    mkdir /usbdisk
+    mkdir /system
+    mkdir /data
+    mkdir /cache
+    mkdir /preload
+    mount /tmp /tmp tmpfs 
+
+on early-fs
+
+    mount ext4 /dev/block/mmcblk0p22 /system noatime wait
+
+    mkdir /efs
+    mount ext4 /dev/block/mmcblk0p11 /efs nosuid nodev noatime wait
+
+# Install Kernel Module
+    # J4FS(lfs) mount points.
+    mkdir /mnt 0775 root root
+    mkdir /mnt/.lfs 0755 root root
+
+    insmod /system/lib/modules/j4fs.ko
+    # We need to decide j4fs's partition number(mmcblk0pX)
+    # loke4
+    mount j4fs /dev/block/mmcblk0p19 /mnt/.lfs wait
+
+    insmod /system/lib/modules/param.ko
+
+on boot
+
+    ifup lo
+    hostname localhost
+    domainname localdomain
+
+    class_start default
+    
+service ueventd /sbin/ueventd
+    critical
+
+service console /sbin/sh
+    class core
+    console
+    disabled
+    group log
+
+on property:ro.debuggable=1
+    start console
+
+service recovery /sbin/recovery
+
+service adbd /sbin/adbd recovery
+    disabled
+
+# Always start adbd on userdebug and eng builds
+# In recovery, always run adbd as root.
+on property:ro.debuggable=1
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 04E8
+    write /sys/class/android_usb/android0/idProduct 685D
+    write /sys/class/android_usb/android0/functions adb
+    write /sys/class/android_usb/android0/enable 1
+    write /sys/class/android_usb/android0/iManufacturer $ro.product.manufacturer
+    write /sys/class/android_usb/android0/iProduct $ro.product.model
+    write /sys/class/android_usb/android0/iSerial $ro.serialno
+    start adbd
+    setprop service.adb.root 1
+
+# Restart adbd so it can run as root
+on property:service.adb.root=1
+    write /sys/class/android_usb/android0/enable 0
+    restart adbd
+    write /sys/class/android_usb/android0/enable 1
