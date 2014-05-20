@@ -66,7 +66,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Screen
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=240 \
+    ro.sf.lcd_density=160 \
     ro.sf.display_rotation=0 \
     ro.lcd_brightness=170 \
     ro.lcd_min_brightness=30
@@ -169,8 +169,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.sync=yes
 
 # Define kind of DPI
-PRODUCT_AAPT_CONFIG := normal hdpi
-PRODUCT_AAPT_PREF_CONFIG := hdpi
+PRODUCT_AAPT_CONFIG := ldpi
+PRODUCT_AAPT_PREF_CONFIG := ldpi
 
 # We have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise

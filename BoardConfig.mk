@@ -1,6 +1,5 @@
 #
 # Copyright (C) 2013 The Android Open Source Project
-# Copyright (C) 2013 Óliver García Albertos (oliverarafo@gmail.com)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -51,7 +50,7 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USERIMAGES_USE_EXT4 := true
 # Kernel
 
-TARGET_PREBUILT_KERNEL := device/samsung/nevisp/kernel
+#TARGET_PREBUILT_KERNEL := device/samsung/nevisp/kernel
 TARGET_KERNEL_CONFIG := bcm21654_rhea_ss_nevisp_rev00_defconfig
 #TARGET_KERNEL_SOURCE := kernel/samsung/nevisp
 
