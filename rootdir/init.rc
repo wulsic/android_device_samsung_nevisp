@@ -4,7 +4,6 @@
 # This is a common source of Android security bugs.
 #
 
-import /init.cm.rc
 import /init.${ro.hardware}.rc
 import /init.usb.rc
 import /init.trace.rc
@@ -308,6 +307,9 @@ on post-fs-data
     # Set indication (checked by vold) that we have finished this action
     #setprop vold.post_fs_data_done 1
 
+# Include extra init file
+    import /init.cm.rc
+
 # MTP permission
 	chmod 0660 /dev/usb_mtp_gadget
 	chown system system /dev/usb_mtp_gadget
@@ -600,6 +602,10 @@ on boot
 # Set this property so surfaceflinger is not started by system_init
     setprop system_init.startsurfaceflinger 0
 
+# Run sysinit
+    exec /system/bin/sysinit
+
+
 ## icd
 #    exec icd_check
 #    chown system system /dev/icd
@@ -681,9 +687,6 @@ service ueventd /sbin/ueventd
 
 on property:ro.debuggable=1
     start console
-
-on property:ro.debuggable=0
-    start console_user
 
 # adbd is controlled via property triggers in init.<platform>.usb.rc
 service adbd /sbin/adbd
@@ -837,9 +840,6 @@ service installd /system/bin/installd
     class main
     socket installd stream 600 system system
 
-service flash_recovery /system/bin/sh /system/etc/install-recovery.sh
-    class main
-    oneshot
 
 service racoon /system/bin/racoon
     class main
