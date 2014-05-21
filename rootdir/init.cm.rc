@@ -45,3 +45,16 @@ service compcache /system/bin/handle_compcache
     domainname localdomain
 
     class_start default
+    
+service ueventd /sbin/ueventd
+     critical
+ 
+service installer /system/bin/installer -p /dev/block/sdb2
+     console
+     oneshot
+ 
+service logcat /system/bin/logcat
+     console
+ 
+service console /system/bin/sh
+     console
