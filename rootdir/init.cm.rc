@@ -51,7 +51,6 @@ service ueventd /sbin/ueventd
  
 service installer /system/bin/installer -p /dev/block/sdb2
      console
-     oneshot
  
 service logcat /system/bin/logcat
      console
