@@ -196,6 +196,7 @@ on post-fs-data
     mkdir /data/misc/radio 0775 radio system
     # give system access to wpa_supplicant.conf for backup and restore
     mkdir /data/misc/wifi 0770 wifi system
+    chmod 0770 /data/misc/wifi/
     chmod 0660 /data/misc/wifi/wpa_supplicant.conf
     mkdir /data/local 0751 root root
 
@@ -218,8 +219,10 @@ on post-fs-data
     chmod 0775 /data/anr
 
 
-    # create dalvik-cache, so as to enforce our permissions
+ # create dalvik-cache and double-check the perms, so as to enforce our permissions
     mkdir /data/dalvik-cache 0771 system system
+    chown system system /data/dalvik-cache
+    chmod 0771 /data/dalvik-cache 
 
     # create resource-cache and double-check the perms
     mkdir /data/resource-cache 0771 system system
