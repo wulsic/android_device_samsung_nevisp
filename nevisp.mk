@@ -22,7 +22,7 @@ $(call inherit-product, build/target/product/full_base_telephony.mk)
 $(call inherit-product, build/target/product/languages_full.mk)
 
 # Use the Dalvik VM specific for devices with 1024 MB of RAM
-$(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap)
 
 # Inherit the proprietary vendors blobs for Samsung Golden.
 $(call inherit-product-if-exists, vendor/samsung/nevisp/nevisp-vendor.mk)
@@ -169,8 +169,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.sync=yes
 
 # Define kind of DPI
-PRODUCT_AAPT_CONFIG := ldpi
-PRODUCT_AAPT_PREF_CONFIG := ldpi
+PRODUCT_AAPT_CONFIG := mdpi
+PRODUCT_AAPT_PREF_CONFIG := mdpi
 
 # We have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
