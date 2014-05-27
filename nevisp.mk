@@ -22,7 +22,7 @@ $(call inherit-product, build/target/product/full_base_telephony.mk)
 $(call inherit-product, build/target/product/languages_full.mk)
 
 # Use the Dalvik VM specific for devices with 1024 MB of RAM
-$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap)
+$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 # Inherit the proprietary vendors blobs for Samsung Golden.
 $(call inherit-product-if-exists, vendor/samsung/nevisp/nevisp-vendor.mk)
