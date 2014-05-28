@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2013 The Android Open Source Project
- * Copyright (C) 2013 Óliver García Albertos (oliverarafo@gmail.com)
+ * Copyright (C) 2007 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +14,6 @@
  * limitations under the License.
  */
 
-#include <stdbool.h>
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -30,27 +28,15 @@
 #include <linux/kd.h>
 
 #include <pixelflinger/pixelflinger.h>
+#include <cutils/memory.h>
 
-#ifdef BOARD_USE_CUSTOM_RECOVERY_FONT
-#include BOARD_USE_CUSTOM_RECOVERY_FONT
+#ifndef BOARD_LDPI_RECOVERY
+	#include "font_10x18.h"
 #else
-#include "font_10x18.h"
+	#include "font_7x16.h"
 #endif
 
 #include "minui.h"
-
-#if defined(RECOVERY_BGRA)
-#define PIXEL_FORMAT GGL_PIXEL_FORMAT_BGRA_8888
-#define PIXEL_SIZE   4
-#elif defined(RECOVERY_RGBX)
-#define PIXEL_FORMAT GGL_PIXEL_FORMAT_RGBX_8888
-#define PIXEL_SIZE   4
-#else
-#define PIXEL_FORMAT GGL_PIXEL_FORMAT_RGB_565
-#define PIXEL_SIZE   2
-#endif
-
-#define NUM_BUFFERS 2
 
 typedef struct {
     GGLSurface texture;
@@ -62,20 +48,19 @@ typedef struct {
 static GRFont *gr_font = 0;
 static GGLContext *gr_context = 0;
 static GGLSurface gr_font_texture;
-static GGLSurface gr_framebuffer[NUM_BUFFERS];
+static GGLSurface gr_framebuffer[3];
 static GGLSurface gr_mem_surface;
 static unsigned gr_active_fb = 0;
-static unsigned double_buffering = 0;
 
 static int gr_fb_fd = -1;
 static int gr_vt_fd = -1;
 
 static struct fb_var_screeninfo vi;
-static struct fb_fix_screeninfo fi;
 
 static int get_framebuffer(GGLSurface *fb)
 {
     int fd;
+    struct fb_fix_screeninfo fi;
     void *bits;
 
     fd = open("/dev/graphics/fb0", O_RDWR);
@@ -84,48 +69,13 @@ static int get_framebuffer(GGLSurface *fb)
         return -1;
     }
 
-    if (ioctl(fd, FBIOGET_VSCREENINFO, &vi) < 0) {
+    if (ioctl(fd, FBIOGET_FSCREENINFO, &fi) < 0) {
         perror("failed to get fb0 info");
         close(fd);
         return -1;
     }
 
-    vi.bits_per_pixel = PIXEL_SIZE * 8;
-    if (PIXEL_FORMAT == GGL_PIXEL_FORMAT_BGRA_8888) {
-      vi.red.offset     = 8;
-      vi.red.length     = 8;
-      vi.green.offset   = 16;
-      vi.green.length   = 8;
-      vi.blue.offset    = 24;
-      vi.blue.length    = 8;
-      vi.transp.offset  = 0;
-      vi.transp.length  = 8;
-    } else if (PIXEL_FORMAT == GGL_PIXEL_FORMAT_RGBX_8888) {
-      vi.red.offset     = 24;
-      vi.red.length     = 8;
-      vi.green.offset   = 16;
-      vi.green.length   = 8;
-      vi.blue.offset    = 8;
-      vi.blue.length    = 8;
-      vi.transp.offset  = 0;
-      vi.transp.length  = 8;
-    } else { /* RGB565*/
-      vi.red.offset     = 11;
-      vi.red.length     = 5;
-      vi.green.offset   = 5;
-      vi.green.length   = 6;
-      vi.blue.offset    = 0;
-      vi.blue.length    = 5;
-      vi.transp.offset  = 0;
-      vi.transp.length  = 0;
-    }
-    if (ioctl(fd, FBIOPUT_VSCREENINFO, &vi) < 0) {
-        perror("failed to put fb0 info");
-        close(fd);
-        return -1;
-    }
-
-    if (ioctl(fd, FBIOGET_FSCREENINFO, &fi) < 0) {
+    if (ioctl(fd, FBIOGET_VSCREENINFO, &vi) < 0) {
         perror("failed to get fb0 info");
         close(fd);
         return -1;
@@ -141,26 +91,29 @@ static int get_framebuffer(GGLSurface *fb)
     fb->version = sizeof(*fb);
     fb->width = vi.xres;
     fb->height = vi.yres;
-    fb->stride = fi.line_length/PIXEL_SIZE;
+#ifdef BOARD_HAS_JANKY_BACKBUFFER
+    fb->stride = fi.line_length/2;
+#else
+    fb->stride = vi.xres_virtual;
+#endif
     fb->data = bits;
-    fb->format = PIXEL_FORMAT;
-    memset(fb->data, 0, vi.yres * fi.line_length);
+    fb->format = GGL_PIXEL_FORMAT_RGB_565;
+    memset(fb->data, 0, vi.yres * vi.xres_virtual * vi.bits_per_pixel / 8);
 
     fb++;
-
-    /* check if we can use double buffering */
-    if (vi.yres * fi.line_length * 2 > fi.smem_len)
-        return fd;
-
-    double_buffering = 1;
 
     fb->version = sizeof(*fb);
     fb->width = vi.xres;
     fb->height = vi.yres;
-    fb->stride = fi.line_length/PIXEL_SIZE;
+#ifdef BOARD_HAS_JANKY_BACKBUFFER
+    fb->stride = fi.line_length/2;
     fb->data = (void*) (((unsigned) bits) + vi.yres * fi.line_length);
-    fb->format = PIXEL_FORMAT;
-    memset(fb->data, 0, vi.yres * fi.line_length);
+#else
+  fb->stride = vi.xres_virtual;
+  fb->data = (void*) (((unsigned) bits) + (vi.yres * vi.xres_virtual * vi.bits_per_pixel / 8));
+#endif
+    fb->format = GGL_PIXEL_FORMAT_RGB_565;
+    memset(fb->data, 0, vi.yres * vi.xres_virtual * vi.bits_per_pixel / 8);
 
     return fd;
 }
@@ -169,20 +122,42 @@ static void get_memory_surface(GGLSurface* ms) {
   ms->version = sizeof(*ms);
   ms->width = vi.xres;
   ms->height = vi.yres;
-  ms->stride = fi.line_length/PIXEL_SIZE;
-  ms->data = malloc(fi.line_length * vi.yres);
-  ms->format = PIXEL_FORMAT;
+  ms->stride = vi.xres_virtual;
+  ms->data = malloc(vi.xres_virtual * vi.yres * vi.bits_per_pixel / 8);
+  ms->format = GGL_PIXEL_FORMAT_RGB_565;
 }
 
 static void set_active_framebuffer(unsigned n)
 {
-    if (n > 1 || !double_buffering) return;
-    vi.yres_virtual = vi.yres * NUM_BUFFERS;
+    if (n > 1) return;
+    vi.yres_virtual = vi.yres * 2;
     vi.yoffset = n * vi.yres;
-    vi.bits_per_pixel = PIXEL_SIZE * 8;
     if (ioctl(gr_fb_fd, FBIOPUT_VSCREENINFO, &vi) < 0) {
         perror("active fb swap failed");
     }
+}
+
+void gr_flip_32(unsigned *bits, unsigned short *ptr, unsigned count)
+
+{
+  unsigned i=0;
+  
+ while (i<count) {
+  uint32_t rgb32, red, green, blue, alpha;
+  
+  /* convert 16 bits to 32 bits */
+  rgb32 = ((ptr[i] >> 11) & 0x1F);
+  red = (rgb32 << 3) | (rgb32 >> 2);
+  rgb32 = ((ptr[i] >> 5) & 0x3F);
+  green = (rgb32 << 2) | (rgb32 >> 4);
+  rgb32 = ((ptr[i]) & 0x1F);
+  blue = (rgb32 << 3) | (rgb32 >> 2);
+  alpha = 0xff;
+  rgb32 = (alpha << 24) | (blue << 16) | (green << 8) | (red);
+  android_memset32((uint32_t *)bits, rgb32, 4);
+  i++;
+  bits++;
+ }
 }
 
 void gr_flip(void)
@@ -190,13 +165,29 @@ void gr_flip(void)
     GGLContext *gl = gr_context;
 
     /* swap front and back buffers */
-    if (double_buffering)
-        gr_active_fb = (gr_active_fb + 1) & 1;
+    gr_active_fb = (gr_active_fb + 1) & 1;
+
+#ifdef BOARD_HAS_FLIPPED_SCREEN
+    /* flip buffer 180 degrees for devices with physicaly inverted screens */
+    unsigned int i;
+    for (i = 1; i < (vi.xres * vi.yres); i++) {
+        unsigned short tmp = gr_mem_surface.data[i];
+        gr_mem_surface.data[i] = gr_mem_surface.data[(vi.xres * vi.yres * 2) - i];
+        gr_mem_surface.data[(vi.xres * vi.yres * 2) - i] = tmp;
+    }
+#endif
 
     /* copy data from the in-memory surface to the buffer we're about
-     * to make active. */
+   * to make active. */ 
+  if(vi.bits_per_pixel == 32)
+  {
+    gr_flip_32((unsigned *)gr_framebuffer[gr_active_fb].data, (unsigned short *)gr_mem_surface.data, (vi.xres_virtual * vi.yres));
+  }
+  else
+  {
     memcpy(gr_framebuffer[gr_active_fb].data, gr_mem_surface.data,
-           fi.line_length * vi.yres);
+    vi.xres_virtual * vi.yres *2);
+  }
 
     /* inform the display driver */
     set_active_framebuffer(gr_active_fb);
@@ -216,12 +207,6 @@ void gr_color(unsigned char r, unsigned char g, unsigned char b, unsigned char a
 int gr_measure(const char *s)
 {
     return gr_font->cwidth * strlen(s);
-}
-
-void gr_font_size(int *x, int *y)
-{
-    *x = gr_font->cwidth;
-    *y = gr_font->cheight;
 }
 
 int gr_text(int x, int y, const char *s)
@@ -315,7 +300,7 @@ static void gr_init_font(void)
     gr_font->ascent = font.cheight - 2;
 }
 
-int gr_init_real(void)
+int gr_init(void)
 {
     gglInit(&gr_context);
     GGLContext *gl = gr_context;
@@ -352,16 +337,6 @@ int gr_init_real(void)
     gl->enable(gl, GGL_BLEND);
     gl->blendFunc(gl, GGL_SRC_ALPHA, GGL_ONE_MINUS_SRC_ALPHA);
 
-    gr_fb_blank(true);
-    gr_fb_blank(false);
-
-    return 0;
-}
-
-int gr_init(void)
-{
-    gr_init_real();
-    gr_init_real();
     return 0;
 }
 
@@ -390,13 +365,4 @@ int gr_fb_height(void)
 gr_pixel *gr_fb_data(void)
 {
     return (unsigned short *) gr_mem_surface.data;
-}
-
-void gr_fb_blank(bool blank)
-{
-    int ret;
-
-    ret = ioctl(gr_fb_fd, FBIOBLANK, blank ? FB_BLANK_POWERDOWN : FB_BLANK_UNBLANK);
-    if (ret < 0)
-        perror("ioctl(): blank");
 }
