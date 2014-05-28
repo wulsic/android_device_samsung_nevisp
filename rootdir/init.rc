@@ -219,10 +219,14 @@ on post-fs-data
     chmod 0775 /data/anr
 
 
- # create dalvik-cache and double-check the perms, so as to enforce our permissions
+ # create dalvik-cache and double-check the perms
     mkdir /data/dalvik-cache 0771 system system
     chown system system /data/dalvik-cache
-    chmod 0771 /data/dalvik-cache 
+    chmod 0771 /data/dalvik-cache
+
+    mkdir /cache/dalvik-cache 0771 system system
+    chown system system /cache/dalvik-cache
+    chmod 0771 /cache/dalvik-cache
 
     # create resource-cache and double-check the perms
     mkdir /data/resource-cache 0771 system system
