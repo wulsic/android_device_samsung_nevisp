@@ -17,8 +17,11 @@ on early-init
     symlink /storage/UsbDriveE /mnt/UsbDriveE
     symlink /storage/UsbDriveF /mnt/UsbDriveF
 
+    export SECONDARY_STORAGE /storage/sdcard1
+    mkdir /storage/sdcard1 0000 system system
+    symlink /storage/sdcard1 /mnt/external_sd
+
     export SECONDARY_STORAGE /storage/extSdCard:/storage/UsbDriveA:/storage/UsbDriveB:/storage/UsbDriveC:/storage/UsbDriveD:/storage/UsbDriveE:/storage/UsbDriveF
-    mkdir /storage/extSdCard 0000 system system
     mkdir /storage/UsbDriveA 0000 system system
     mkdir /storage/UsbDriveB 0000 system system
     mkdir /storage/UsbDriveC 0000 system system
