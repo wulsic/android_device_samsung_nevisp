@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+DEVICE_PACKAGE_OVERLAYS += device/samsung/nevisp/overlay
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, build/target/product/full_base_telephony.mk)
@@ -24,7 +24,7 @@ $(call inherit-product, build/target/product/languages_full.mk)
 # Use the Dalvik VM specific for devices with 1024 MB of RAM
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
-# Inherit the proprietary vendors blobs for Samsung Golden.
+# Inherit the proprietary vendors blobs for Samsung Galaxy Fame.
 $(call inherit-product-if-exists, vendor/samsung/nevisp/nevisp-vendor.mk)
 
 # Ramdisk
@@ -91,13 +91,24 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/etc/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
     system/bluetooth/data/main.le.conf:system/etc/bluetooth/main.conf
 
-# RIL
-#PRODUCT_COPY_FILES += \
-#    $(LOCAL_PATH)/configs/etc/ste_modem.sh:system/etc/ste_modem.sh \
-#    $(LOCAL_PATH)/configs/etc/cspsa.conf:system/etc/cspsa.conf \
-#    $(LOCAL_PATH)/configs/etc/AT/manuf_id.cfg:system/etc/AT/manuf_id.cfg \
-#    $(LOCAL_PATH)/configs/etc/AT/model_id.cfg:system/etc/AT/model_id.cfg \
-#    $(LOCAL_PATH)/configs/etc/AT/system_id.cfg:system/etc/AT/system_id.cfg
+# Wifi/Ril
+PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.interface=wlan0 \
+    mobiledata.interfaces=rmnet0 \
+    ro.telephony.ril_class=SamsungBCMRIL 
+
+# enable Google-specific location features,
+# like NetworkLocationProvider and LocationCollector
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.com.google.locationfeatures=1 \
+    ro.com.google.networklocation=1
+
+# Extended JNI checks
+# The extended JNI checks will cause the system to run more slowly, but they can spot a variety of nasty bugs 
+# before they have a chance to cause problems.
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.kernel.android.checkjni=0 \
+    dalvik.vm.checkjni=false
 
 # GPS
 PRODUCT_COPY_FILES += \
@@ -168,9 +179,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.setupwizard.enable_bypass=1 \
     ro.config.sync=yes
 
+# Boot Ani
+TARGET_SCREEN_HEIGHT := 320
+TARGET_SCREEN_WIDTH := 240
+
 # Define kind of DPI
 PRODUCT_AAPT_CONFIG := mdpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
 
 # We have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
+
+PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
+PRODUCT_NAME := full_nevisp
+PRODUCT_DEVICE := nevisp
