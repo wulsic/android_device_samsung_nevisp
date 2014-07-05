@@ -1,0 +1,49 @@
+
+/dev/pvrsrvkm             0666   system     system
+/dev/video0               0660   system     camera
+/dev/video1               0660   system     camera
+/dev/video2               0660   system     camera
+/dev/s3c-jpg              0660   system     camera
+/dev/s3c-mem              0660   system     system
+/dev/s3c-mfc              0660   system     graphics
+
+/dev/modem_ctl            0660   radio      radio
+/dev/modem_fmt            0660   radio      radio
+/dev/modem_rfs            0660   radio      radio
+/dev/s3c2410_serial3      0660   radio      radio
+/dev/block/mtdblock5      0660   radio      radio
+/dev/mtd/mtd5ro           0660   radio      radio
+
+# for Sensor HAL
+/dev/akm8973              0660   system     system
+/dev/accelerometer        0660   system     system
+
+# for GPS
+/dev/s3c2410_serial1      0600   gps        gps
+
+# for Camera
+/dev/bcm_unicam           0660   system     camera
+/dev/bcm_isp              0660   system     camera
+/dev/i2c-0                0660   system     camera
+/dev/i2c-1                0660   system     camera
+/dev/i2c-2                0660   system     camera
+
+#for V3D
+/dev/v3d                  0666   system     graphics
+/dev/pmem                 0666   system     graphics
+/dev/bralloc_mem          0666   system     graphics
+
+#for VCE
+/dev/vce                  0666   system     graphics
+
+#Permission for NV partition 
+/dev/block/mmcblk0p18		0770	radio	system
+
+# SEC User Dump
+# /dev/sec_user_dump        0660   system     shell  
+
+# SYSTEM Status
+/dev/block/mmcblk0p11        0660   system     root  
+
+# wifi
+/dev/rfkill               0660    root        wifi
