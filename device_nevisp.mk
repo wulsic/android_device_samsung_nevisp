@@ -14,25 +14,29 @@ PRODUCT_AAPT_PREF_CONFIG := mdpi
 
 # Init files
 PRODUCT_COPY_FILES += \
-	device/samsung/nevisp/init.rhea_ss_nevisp.rc:root/init.rhea_ss_nevisp.rc \
-	device/samsung/nevisp/init.bcm2165x.usb.rc:root/init.bcm2165x.usb.rc \
-	device/samsung/nevisp/init.log.rc:root/init.log.rc \
-	device/samsung/nevisp/init.bt.rc:root/init.bt.rc \
-	device/samsung/nevisp/lpm.rc:root/lpm.rc \
-	device/samsung/nevisp/ueventd.rhea_ss_nevisp.rc:root/ueventd.rhea_ss_nevisp.rc \
-        device/samsung/nevisp/init.recovery.rhea_ss_nevisp.rc:root/init.recovery.rhea_ss_nevisp.rc \
-	device/samsung/nevisp/fstab.rhea_ss_nevisp:root/fstab.rhea_ss_nevisp 
+	device/samsung/nevisp/rootdir/init.rhea_ss_nevisds.rc:root/init.rhea_ss_nevisp.rc \
+	device/samsung/nevisp/rootdir/init.bcm2165x.usb.rc:root/init.bcm2165x.usb.rc \
+	device/samsung/nevisp/rootdir/init.log.rc:root/init.log.rc \
+	device/samsung/nevisp/rootdir/init.bt.rc:root/init.bt.rc \
+	device/samsung/nevisp/rootdir/lpm.rc:root/lpm.rc \
+	device/samsung/nevisp/rootdir/ueventd.rhea_ss_nevisp.rc:root/ueventd.rhea_ss_nevisp.rc \
+        device/samsung/nevisp/rootdir/init.recovery.rhea_ss_nevisp.rc:root/init.recovery.rhea_ss_nevisp.rc \
+	device/samsung/nevisp/rootdir/fstab.rhea_ss_nevisp:root/fstab.rhea_ss_nevisp 
+	
+PRODUCT_COPY_FILES += \
+ 	device/samsung/nevisp/rootdir/vold.fstab:system/etc/vold.fstab 
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
-	device/samsung/nevisp/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
-	device/samsung/nevisp/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
-	device/samsung/nevisp/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
-	device/samsung/nevisp/Generic.kl:system/usr/keylayout/Generic.kl \
-	device/samsung/nevisp/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl 
+	device/samsung/nevisp/keymaps/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
+	device/samsung/nevisp/keymaps/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
+	device/samsung/nevisp/keymaps/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+	device/samsung/nevisp/keymaps/Generic.kl:system/usr/keylayout/Generic.kl \
+	device/samsung/nevisp/keymaps/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl 
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
+    make_ext4fs
 	setup_fs
 
 # Usb accessory

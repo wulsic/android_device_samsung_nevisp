@@ -1,2 +1,2 @@
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/nevisp.mk
+    $(LOCAL_DIR)/device_nevisp.mk

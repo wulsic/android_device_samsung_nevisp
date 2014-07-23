@@ -89,8 +89,8 @@ WIFI_BAND                   := 802_11_ABG
 # Wi-Fi Tethering
 BOARD_HAVE_SAMSUNG_WIFI := true
 
-# Bluetooth
-BOARD_BLUEDROID_VENDOR_CONF := device/samsung/nevisp/bluetooth/btvendor_nevisp.txt
+
+
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
@@ -102,7 +102,7 @@ BRCM_BTL_OBEX_USE_DBUS:=true
 TARGET_PREBUILT_BT := y
 BT_CHIP:=BCM21654G
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/nevisp/bluetooth
-BOARD_BLUEDROID_VENDOR_CONF := device/samsung/nevisp/libbt_vndcfg.txt
+BOARD_BLUEDROID_VENDOR_CONF := device/samsung/nevisp/bluetooth/btvendor_nevisp.txt
 
 # RIL
 BOARD_RIL_CLASS := ../../../device/samsung/nevisp/ril/

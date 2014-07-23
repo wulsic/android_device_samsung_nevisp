@@ -1,13 +1,15 @@
 Cyanogenmod 10 for Galaxy Fame (S6810/p)
 
 Credits Corsicanu and adytzu33
-Adytzu33 for the base cm10 sourcecode which needed to be edited a bit.
+Adytzu33 for the base cm10 sourcecode which is used as Core base but got edited to an better working sourcecode.
 Corsicanu for providing the cm10 sourcecode from Adytzu33 who never comes on xda anymore and helping on the latest error and fixing the build
 boardconfig.mk and recovery.fstab
 
 README
 
 the final output will be a zip file located at out/target/product/nevisp
+
+And Ofcourse Credits to the betatesters which i still all need to write below.
 
 
 
