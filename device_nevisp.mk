@@ -12,7 +12,7 @@ PRODUCT_AAPT_CONFIG := normal ldpi mdpi nodpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
 #$(call inherit-product, device/mdpi-common/mdpi.mk)
 
-# Init files
+# Ramdisk Init files
 PRODUCT_COPY_FILES += \
 	device/samsung/nevisp/rootdir/init.rhea_ss_nevisds.rc:root/init.rhea_ss_nevisp.rc \
 	device/samsung/nevisp/rootdir/init.bcm2165x.usb.rc:root/init.bcm2165x.usb.rc \
@@ -26,6 +26,86 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
  	device/samsung/nevisp/rootdir/vold.fstab:system/etc/vold.fstab 
 
+# Graphics
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/lib/egl/egl.cfg:system/lib/egl/egl.cfg
+PRODUCT_PACKAGES += \
+    libblt_hw
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.opengles.version=131072 \
+    debug.hwui.render_dirty_regions=false \
+    persist.sys.use_dithering=2 \
+    persist.sys.strictmode.disable=1
+
+# Media
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/etc/media_profiles.xml:system/etc/media_profiles.xml \
+    $(LOCAL_PATH)/configs/etc/media_codecs.xml:system/etc/media_codecs.xml 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ste.nmf.autoidle=1 \
+    ste.video.dec.mpeg4.in.size=8192 \
+    ste.video.enc.out.buffercnt=5 \
+    ste.video.dec.recycle.delay=1 \
+    ste.omx.ctx=0
+
+# Screen
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sf.lcd_density=160 \
+    ro.sf.display_rotation=0 \
+    ro.lcd_brightness=170 \
+    ro.lcd_min_brightness=30
+
+# Camera
+PRODUCT_PROPERTY_OVERRIDES += \
+    ste.cam.front.orientation=270 \
+    ste.cam.back.orientation=90 \
+    ste.cam.ext.cfg.path.secondary=/system/cameradata/datapattern_front_420sp.yuv
+
+# Wifi
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
+PRODUCT_PACKAGES += \
+    libnetcmdiface
+PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.interface=wlan0 \
+    wifi.supplicant_scan_interval=15
+
+# Bluetooth
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/etc/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
+    system/bluetooth/data/main.le.conf:system/etc/bluetooth/main.conf	
+	
+# Wifi/Ril
+PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.interface=wlan0 \
+    mobiledata.interfaces=rmnet0 \
+    ro.telephony.ril_class=SamsungBCMRIL 
+	
+# GPS
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/etc/sirfgps.conf:system/etc/sirfgps.conf \
+    $(LOCAL_PATH)/configs/etc/gps.conf:system/etc/gps.conf
+
+# Audio
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/etc/audio_policy.conf:system/etc/audio_policy.conf 
+PRODUCT_PACKAGES += \
+    audio.a2dp.default \
+    audio.usb.default \
+    libasound
+
+# Sensors
+PRODUCT_PACKAGES += \
+    lights.rhea
+
+# Power
+
+# USB
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config=mtp,adb \
+    persist.service.adb.enable=1 \
+    ste.special_fast_dormancy=false	
+	
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
 	device/samsung/nevisp/keymaps/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
@@ -52,7 +132,20 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	SamsungServiceMode 
 	
+# Misc packages
+PRODUCT_PACKAGES += \
+    Torch \
+    com.android.future.usb.accessory
 
+# Misc packages
+
+# Non-device-specific props
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.com.google.locationfeatures=1 \
+    ro.setupwizard.mode=OPTIONAL \
+    ro.setupwizard.enable_bypass=1 \
+    ro.config.sync=yes
+	
 # Charger
 PRODUCT_PACKAGES += \
 	charger \
