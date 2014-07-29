@@ -13,7 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+ 
+#include <stdbool.h>
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -209,6 +210,12 @@ int gr_measure(const char *s)
     return gr_font->cwidth * strlen(s);
 }
 
+void gr_font_size(int *x, int *y)
+{
+     *x = gr_font->cwidth;
+     *y = gr_font->cheight;
+}
+
 int gr_text(int x, int y, const char *s)
 {
     GGLContext *gl = gr_context;
@@ -336,10 +343,12 @@ int gr_init(void)
     gl->activeTexture(gl, 0);
     gl->enable(gl, GGL_BLEND);
     gl->blendFunc(gl, GGL_SRC_ALPHA, GGL_ONE_MINUS_SRC_ALPHA);
-
+    gr_fb_blank(true);
+    gr_fb_blank(false);
+ 
     return 0;
 }
-
+ 
 void gr_exit(void)
 {
     close(gr_fb_fd);
@@ -365,4 +374,13 @@ int gr_fb_height(void)
 gr_pixel *gr_fb_data(void)
 {
     return (unsigned short *) gr_mem_surface.data;
+}
+
+void gr_fb_blank(bool blank)
+{
+    int ret;
+
+    ret = ioctl(gr_fb_fd, FBIOBLANK, blank ? FB_BLANK_POWERDOWN : FB_BLANK_UNBLANK);
+    if (ret < 0)
+        perror("ioctl(): blank");
 }
