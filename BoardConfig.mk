@@ -40,11 +40,7 @@ TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 
 # Partitions
-<<<<<<< HEAD
-BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 mem=456M androidboot.console=ttyS1 gpt v3d_mem=67108864 pmem=24M@0x9E800000
-=======
 BOARD_KERNEL_CMDLINE :=
->>>>>>> 46d6f7cafea39f011086f2f8c4aafa39077b20e8
 BOARD_KERNEL_BASE := 0x82000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
@@ -53,17 +49,18 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 939524096
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2236070912
 BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USERIMAGES_USE_EXT4 := true
-# Kernel
 
+# Kernel
 #TARGET_PREBUILT_KERNEL := device/samsung/nevisp/kernel
 TARGET_KERNEL_CONFIG := bcm21654_rhea_ss_nevisp_rev00_defconfig
-#TARGET_KERNEL_SOURCE := kernel/samsung/nevisp
+TARGET_KERNEL_SOURCE := kernel/samsung/nevisp
 
 # Graphics
 TARGET_BOARD_PLATFORM_GPU := hgl
 BOARD_USES_HW_RENDER := true
 #USE_OPENGL_RENDERER := true
 BOARD_EGL_CFG := device/samsung/nevisp/configs/lib/egl/egl.cfg
+BOARD_EGL_NEEDS_LEGACY_FB := true
 #COMMON_GLOBAL_CFLAGS += -DEGL_NEEDS_FNW -DFORCE_SCREENSHOT_CPU_PATH
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
@@ -92,8 +89,6 @@ WIFI_BAND                   := 802_11_ABG
 
 # Wi-Fi Tethering
 BOARD_HAVE_SAMSUNG_WIFI := true
-
-
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -143,4 +138,3 @@ BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/nevisp/recovery/graphics.c
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_LOW_RESOLUTION := true
 BOARD_SUPPRESS_EMMC_WIPE := true
-
