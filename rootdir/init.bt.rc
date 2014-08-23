@@ -1,10 +1,21 @@
 on boot
 
+# for bluetooth
+	#insmod /lib/modules/btlock.ko
+	#chmod 664 /dev/btlock
+	#chown bluetooth system /dev/btlock
+
+#--tosleep 50000	; on-off-on 
+#--patchram system/bin/BCM4334B0_002.001.013.0056.0067_Murata_TESTONLY.hcd /dev/ttyS1
+#--patchram system/bin/BCM4334B0_002.001.013.0056.0066.B53.I2S.Slave.TESTONLY.hcd /dev/ttyS1	; SEC
+#--patchram system/bin/BCM4334B0_002.001.013.0056.0067.VM.I2S.Slave.TESTONLY.hcd /dev/ttyS1 	; Murata
+#--patchram system/bin/BCM4334B0_002.001.013.0079.0088.hcd /dev/ttyS1	; COB
+#--patchram system/bin/BCM4334B0_002.001.013.0142.0145_RC.hcd /dev/ttyS1  ; Off-ON
 service hciattach /system/bin/brcm_patchram_plus -d --enable_hci --no2bytes --enable_lpm \
         --scopcm 0,0,0,0,0,0,0,0,0,0 --baudrate 3000000 \
         --tosleep 50000 \
         --use_baudrate_for_download \
-        --patchram system/bin/BCM4330B1_002.001.003.0967.1089.hcd /dev/ttyS0
+        --patchram system/bin/BCM4334B0_002.001.013.0679.0873.hcd /dev/ttyS0
     class main
     user bluetooth
     group bluetooth net_bt_admin
@@ -12,7 +23,7 @@ service hciattach /system/bin/brcm_patchram_plus -d --enable_hci --no2bytes --en
     oneshot
 
 service hciattach_le /system/bin/brcm_patchram_plus --enable_hci --no2bytes --tosleep 50000 \
-	--baudrate 115200 --use_baudrate_for_download --patchram /system/bin/BCM4330B1_002.001.003.0967.1089.hcd \
+	--baudrate 115200 --use_baudrate_for_download --patchram /system/bin/BCM4334B0_002.001.013.0679.0873.hcd \
 	--i2s=1,0,0,0  /dev/ttyS0
     class main
     user bluetooth
