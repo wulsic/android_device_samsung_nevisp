@@ -36,7 +36,7 @@ PRODUCT_AAPT_PREF_CONFIG := mdpi
 
 # Ramdisk Init files
 PRODUCT_COPY_FILES += \
-	device/samsung/nevisp/rootdir/init.rhea_ss_nevisds.rc:root/init.rhea_ss_nevisp.rc \
+	device/samsung/nevisp/rootdir/init.rhea_ss_nevisp.rc:root/init.rhea_ss_nevisp.rc \
 	device/samsung/nevisp/rootdir/init.bcm2165x.usb.rc:root/init.bcm2165x.usb.rc \
 	device/samsung/nevisp/rootdir/init.log.rc:root/init.log.rc \
 	device/samsung/nevisp/rootdir/init.bt.rc:root/init.bt.rc \
