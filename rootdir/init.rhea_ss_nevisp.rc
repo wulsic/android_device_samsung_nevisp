@@ -365,7 +365,7 @@ on boot
     setprop ro.multisim.simslotcount 2
     
 on fs
-    mount_all /fstab.rhea_ss_nevisds
+    mount_all /fstab.rhea_ss_nevisp
     setprop ro.crypto.fuse_sdcard true
 
     # don't require sim

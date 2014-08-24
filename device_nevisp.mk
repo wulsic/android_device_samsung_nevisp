@@ -59,6 +59,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.use_dithering=2 \
     persist.sys.strictmode.disable=1
 
+#Samsung framework files (TEST NOT FOR MASTER BRANCH YET)
+PRODUCT_COPY_FILES += \
+        device/samsung/nevisp/prebuilt/secframeworks/seccamera.jar:system/framework/seccamera.jar \
+        device/samsung/nevisp/prebuilt/secframeworks/sec_edm.jar:system/framework/sec_edm.jar \
+        device/samsung/nevisp/prebuilt/secframeworks/secface.jar:system/framework/secface.jar \
+        device/samsung/nevisp/prebuilt/secframeworks/sec_feature.jar:system/framework/sec_feature.jar \
+        device/samsung/nevisp/prebuilt/secframeworks/sechardware.jar:system/framework/sechardware.jar \
+        device/samsung/nevisp/prebuilt/secframeworks/secmediarecorder.jar:system/framework/secmediarecorder.jar \
+        device/samsung/nevisp/prebuilt/secframeworks/sec_platform_library.jar:system/framework/sec_platform_library.jar \
+
 # Media
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/etc/media_profiles.xml:system/etc/media_profiles.xml \
