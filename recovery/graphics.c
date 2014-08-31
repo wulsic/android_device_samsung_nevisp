@@ -39,6 +39,8 @@
 
 #include "minui.h"
 
+int gr_text(int x, int y, const char *s);
+
 typedef struct {
     GGLSurface texture;
     unsigned cwidth;
