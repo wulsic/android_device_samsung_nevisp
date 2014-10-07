@@ -97,7 +97,7 @@ TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/android0/f_mass_storage/lun%d/file"
 
 # CMHW
-BOARD_HARDWARE_CLASS := hardware/samsung/cmhw/
+BOARD_HARDWARE_CLASS :=device/samsung/nevisp/cmhw/
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
