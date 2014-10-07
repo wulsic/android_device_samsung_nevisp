@@ -14,22 +14,46 @@ PRODUCT_AAPT_PREF_CONFIG := mdpi
 
 # Init files
 PRODUCT_COPY_FILES += \
-	device/samsung/nevisp/init.rhea_ss_nevisp.rc:root/init.rhea_ss_nevisp.rc \
-	device/samsung/nevisp/init.bcm2165x.usb.rc:root/init.bcm2165x.usb.rc \
-	device/samsung/nevisp/init.log.rc:root/init.log.rc \
-	device/samsung/nevisp/init.bt.rc:root/init.bt.rc \
-	device/samsung/nevisp/lpm.rc:root/lpm.rc \
-	device/samsung/nevisp/ueventd.rhea_ss_nevisp.rc:root/ueventd.rhea_ss_nevisp.rc \
-        device/samsung/nevisp/init.recovery.rhea_ss_nevisp.rc:root/init.recovery.rhea_ss_nevisp.rc \
-	device/samsung/nevisp/fstab.rhea_ss_nevisp:root/fstab.rhea_ss_nevisp 
+	device/samsung/nevisp/ramdisk/init.rhea_ss_nevisp.rc:root/init.rhea_ss_nevisp.rc \
+	device/samsung/nevisp/ramdisk/init.bcm2165x.usb.rc:root/init.bcm2165x.usb.rc \
+        device/samsung/nevisp/ramdisk/init.environ.rc:root/init.environ.rc \
+	device/samsung/nevisp/ramdisk/init.log.rc:root/init.log.rc \
+	device/samsung/nevisp/ramdisk/init.bt.rc:root/init.bt.rc \
+        device/samsung/nevisp/ramdisk/init.rc:root/init.rc \
+	device/samsung/nevisp/ramdisk/lpm.rc:root/lpm.rc \
+	device/samsung/nevisp/ramdisk/ueventd.rhea_ss_nevisp.rc:root/ueventd.rhea_ss_nevisp.rc \
+        device/samsung/nevisp/ramdisk/init.recovery.rhea_ss_nevisp.rc:root/init.recovery.rhea_ss_nevisp.rc \
+	device/samsung/nevisp/ramdisk/fstab.rhea_ss_nevisp:root/fstab.rhea_ss_nevisp 
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
-	device/samsung/nevisp/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
-	device/samsung/nevisp/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
-	device/samsung/nevisp/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
-	device/samsung/nevisp/Generic.kl:system/usr/keylayout/Generic.kl \
-	device/samsung/nevisp/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl 
+	device/samsung/nevisp/keymaps/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
+	device/samsung/nevisp/keymaps/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
+	device/samsung/nevisp/keymaps/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+	device/samsung/nevisp/keymaps/Generic.kl:system/usr/keylayout/Generic.kl \
+	device/samsung/nevisp/keymaps/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl 
+
+#Samsung framework files (TEST NOT FOR MASTER BRANCH YET)
+PRODUCT_COPY_FILES += \
+        device/samsung/nevisp/secframeworks/seccamera.jar:system/framework/seccamera.jar \
+        device/samsung/nevisp/secframeworks/sec_edm.jar:system/framework/sec_edm.jar \
+        device/samsung/nevisp/secframeworks/secface.jar:system/framework/secface.jar \
+        device/samsung/nevisp/secframeworks/sec_feature.jar:system/framework/sec_feature.jar \
+        device/samsung/nevisp/secframeworks/sechardware.jar:system/framework/sechardware.jar \
+        device/samsung/nevisp/secframeworks/secmediarecorder.jar:system/framework/secmediarecorder.jar \
+        device/samsung/nevisp/secframeworks/sec_platform_library.jar:system/framework/sec_platform_library.jar 
+
+#Idk what it does but it got needed in cm10 so for testing including it :P
+PRODUCT_COPY_FILES += \
+        device/samsung/nevisp/gfx.fw:system/vendor/gfx.fw
+
+# Screen
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sf.lcd_density=160 \
+    ro.sf.display_rotation=0 \
+    ro.lcd_brightness=170 \
+    ro.lcd_min_brightness=30
+
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \

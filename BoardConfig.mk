@@ -15,7 +15,7 @@ TARGET_ARCH_LOWMEM := true
 
 TARGET_BOOTLOADER_BOARD_NAME := rhea
 
-BOARD_KERNEL_CMDLINE :=
+BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 mem=456M androidboot.console=ttsyS1 gpt v3d_mem=67108864 pmem=24M@0x9E800000
 BOARD_KERNEL_BASE := 0x82000000
 BOARD_KERNEL_PAGESIZE := 4096
 
@@ -87,7 +87,7 @@ BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charg
 BOARD_RIL_CLASS := ../../../device/samsung/nevisp/ril/
 
 # Recovery
-TARGET_RECOVERY_FSTAB := device/samsung/nevisp/fstab.rhea_ss_nevisp
+TARGET_RECOVERY_FSTAB := device/samsung/nevisp/ramdisk/fstab.rhea_ss_nevisp
 BOARD_MDPI_RECOVERY := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := "<font_7x16.h>"
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/nevisp/recovery/recovery_keys.c
@@ -97,7 +97,7 @@ TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/android0/f_mass_storage/lun%d/file"
 
 # CMHW
-BOARD_HARDWARE_CLASS := hardware/samsung/cmhw/ device/samsung/nevisp/cmhw/
+BOARD_HARDWARE_CLASS := hardware/samsung/cmhw/
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
@@ -107,7 +107,7 @@ BOARD_SEPOLICY_UNION += \
     file_contexts \
 
 #twrp
-#DEVICE_RESOLUTION := 320x480
+DEVICE_RESOLUTION := 320x480
 #RECOVERY_GRAPHICS_USE_LINELENGTH := true
 #RECOVERY_SDCARD_ON_DATA := true
 #BOARD_HAS_NO_REAL_SDCARD := true
