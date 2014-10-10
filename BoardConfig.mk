@@ -30,7 +30,6 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 
 TARGET_KERNEL_SOURCE := kernel/samsung/nevisp
 TARGET_KERNEL_CONFIG := Cyanogenmod_nevisp_defconfig
-TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_LARGE_FILESYSTEM := true
