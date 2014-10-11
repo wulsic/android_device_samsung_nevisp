@@ -4,7 +4,7 @@ on init
     write /sys/class/android_usb/android0/idProduct 685E
     write /sys/class/android_usb/android0/functions mass_storage,adb
 
-    # adb won't work in OSX without this
+    # adb won't work in MAC OSX without this, Weird Mac OS always :p pff
     write /sys/class/android_usb/android0/bDeviceClass EF
     write /sys/class/android_usb/android0/bDeviceSubClass 02
     write /sys/class/android_usb/android0/bDeviceProtocol 01

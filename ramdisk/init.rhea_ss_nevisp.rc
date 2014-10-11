@@ -1,8 +1,8 @@
 import init.bcm2165x.usb.rc
+import init.bt.rc
 import init.log.rc
 
 on early-init
-    loglevel 9
 
     mkdir /efs 0771 radio system
 
@@ -15,20 +15,22 @@ on init
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
+    mkdir /storage/emulated/legacy 0555 root root
+
 
     export EXTERNAL_STORAGE /storage/emulated/legacy
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     export EMULATED_STORAGE_TARGET /storage/emulated
 
-    # Support legacy paths
+  # Support Legacy Paths
     symlink /storage/emulated/legacy /sdcard
     symlink /storage/emulated/legacy /mnt/sdcard
     symlink /storage/emulated/legacy /storage/sdcard0
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
 
     export SECONDARY_STORAGE /storage/sdcard1
-    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
-    mkdir /storage/sdcard1 0700 root root
+    mkdir /storage/sdcard1 0000 system system
+    symlink /storage/sdcard1 /mnt/external_sd
 
     symlink /efs /factory
 
@@ -144,6 +146,15 @@ on boot
 
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
+## NFC
+    setprop ro.nfc.port "I2C"
+    chmod 0600 /dev/pn544
+    chown nfc nfc /dev/pn544
+
+## Vibetonz
+    chmod 0660 /dev/tspdrv
+    chown root shell /dev/tspdrv
+
 # required so RIL can open kernel RPC drivers
     chmod 0660 /dev/bcm_rpc
     chmod 0660 /dev/bcm_irpc
@@ -221,9 +232,28 @@ on boot
 
     class_start default
     
-#for bluetooth. permission for host interface
+#for Bluetooth. permission for host interface
     chown root bluetooth /dev/ttyS0
     chmod 0777 /dev/ttyS0
+
+#for FM Radio    
+    copy /system/etc/local.prop /data/local.prop
+    chown system bluetooth /data/local.prop
+    chmod 0660 /data/local.prop
+    setprop service.brcm.bt.patchfile /system/bin/BCM4334B0_002.001.013.0679.0873.hcd
+
+# Permissions for FMRadio from Broadcom
+    chmod 0777 /system/bin/btld
+    write /sys/class/gpio/export 92
+    chown system system /sys/class/gpio/gpio92/value
+    chown system system /sys/class/gpio/gpio92/direction
+    write /sys/class/gpio/gpio92/value 0
+    write /sys/class/gpio/gpio92/direction out
+    write /sys/class/gpio/export 56
+    chown system system /sys/class/gpio/gpio56/value
+    chown system system /sys/class/gpio/gpio56/direction
+    write /sys/class/gpio/gpio56/value 0
+    write /sys/class/gpio/gpio56/direction out
 
 # Permission for pm debug - force sleep
     chown system system /sys/module/rhea_pm_dbg/parameters/debug
@@ -368,6 +398,11 @@ service rhea-ril-daemon /system/bin/rild
     user root
     group radio cache inet misc audio system sdcard_rw log sdcard_r
 
+service mobex-daemon /system/bin/npsmobex
+    class main
+    user system
+    group system radio inet sdcard_rw
+
 # create virtual SD card at /storage/sdcard, based on the /data/media directory
 # daemon will drop to user/group system/media_rw after initializing
 # underlying files in /data/media will be created with user and group media_rw (1023)
@@ -435,7 +470,29 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
     disabled
     oneshot
 
-# TODO: btld is only used for FM
+# When the default SIM for data connections is updated,
+# also update the DUN AT channel with the default SIM.
+on property:persist.sys.dataprefer.simid=0
+     write /data/atx/setsim.txt at*msetsim=1
+     chmod 0666 /data/atx/setsim.txt
+     start set_simid
+
+# When the default SIM for data connections is updated,
+# also update the DUN AT channel with the default SIM.
+on property:persist.sys.dataprefer.simid=1
+     write /data/atx/setsim.txt at*msetsim=2
+     chmod 0666 /data/atx/setsim.txt
+     start set_simid
+
+#btld is only used for FM
+# Make sure we startup btld before hcid
+#service btld /system/bin/logwrapper /system/bin/btld -hb 3000000 -hp /dev/ttyS1 -lpm 0 -nice -7
+#service btld /system/bin/logwrapper /system/bin/btld -lpm 0 ;; low power mode on(1), off(0)
+service btld /system/bin/logwrapper /system/bin/btld -lpm 1
+    user root
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
 
 service macloader /system/bin/macloader
 	class main
@@ -467,6 +524,14 @@ service bkmgrd /system/bin/bkmgrd
     oneshot
     user root
     group radio system log
+
+#When the default SIM for data connections is updated,
+# also update the DUN AT channel with the default SIM.
+service set_simid /system/bin/atx --fordev=ACM --runcmd=/data/atx/setsim.txt
+    disabled
+    oneshot
+    user system
+    group input vpn net_admin net_raw radio system sdcard_rw log mount
 
 #Indicate boot complete to PM to complete PM initialization
 on property:dev.bootcomplete=1
