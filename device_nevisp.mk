@@ -25,6 +25,9 @@ PRODUCT_COPY_FILES += \
         device/samsung/nevisp/ramdisk/init.recovery.rhea_ss_nevisp.rc:root/init.recovery.rhea_ss_nevisp.rc \
 	device/samsung/nevisp/ramdisk/fstab.rhea_ss_nevisp:root/fstab.rhea_ss_nevisp 
 
+PRODUCT_COPY_FILES += \
+device/samsung/nevisp/media_codecs.xml:system/etc/media_codecs.xml \
+
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
 	device/samsung/nevisp/keymaps/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
