@@ -1,9 +1,9 @@
 import init.bcm2165x.usb.rc
-import init.bt.rc
 import init.log.rc
 
 on early-init
     loglevel 9
+
     mkdir /efs 0771 radio system
 
 on init
@@ -20,11 +20,11 @@ on init
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     export EMULATED_STORAGE_TARGET /storage/emulated
 
-  # Support Legacy Paths
-     symlink /storage/emulated/legacy /sdcard
-     symlink /storage/emulated/legacy /mnt/sdcard
-     symlink /storage/emulated/legacy /storage/sdcard0
-     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+    # Support legacy paths
+    symlink /storage/emulated/legacy /sdcard
+    symlink /storage/emulated/legacy /mnt/sdcard
+    symlink /storage/emulated/legacy /storage/sdcard0
+    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
 
     export SECONDARY_STORAGE /storage/sdcard1
     mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
@@ -144,15 +144,6 @@ on boot
 
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
-## NFC
-    setprop ro.nfc.port "I2C"
-    chmod 0600 /dev/pn544
-    chown nfc nfc /dev/pn544
-
-## Vibetonz
-    chmod 0660 /dev/tspdrv
-    chown root shell /dev/tspdrv
-
 # required so RIL can open kernel RPC drivers
     chmod 0660 /dev/bcm_rpc
     chmod 0660 /dev/bcm_irpc
@@ -230,7 +221,7 @@ on boot
 
     class_start default
     
-#for Bluetooth. permission for host interface
+#for bluetooth. permission for host interface
     chown root bluetooth /dev/ttyS0
     chmod 0777 /dev/ttyS0
 
@@ -443,6 +434,8 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
     class main
     disabled
     oneshot
+
+# TODO: btld is only used for FM
 
 service macloader /system/bin/macloader
 	class main
