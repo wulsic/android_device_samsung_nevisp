@@ -189,10 +189,6 @@ on boot
     chmod 0777 /dev/s5p-smem
     rm /data/app/tlcd_sock
 
-# phone
-    setprop ro.telephony.call_ring.multiple 0
-
-
 # Enable dithering algorithm
     setprop fb.force.dithering 1
 
@@ -472,6 +468,7 @@ service bkmgrd /system/bin/bkmgrd
 on property:dev.bootcomplete=1
     write /sys/module/rhea_pwr_mgr/parameters/pm_late_init 1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
+    write /sys/block/mmcblk0/queue/scheduler cfq
 
 # fusewrapped external sdcard daemon running as media_rw (1023)
 service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
