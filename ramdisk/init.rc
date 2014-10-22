@@ -614,3 +614,6 @@ service mdnsd /system/bin/mdnsd
     socket mdnsd stream 0660 mdnsr inet
     disabled
     oneshot
+
+# zram page tweaks
+    write /proc/sys/vm/page-cluster

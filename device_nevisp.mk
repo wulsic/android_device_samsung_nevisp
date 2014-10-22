@@ -16,7 +16,6 @@ PRODUCT_AAPT_PREF_CONFIG := mdpi
 PRODUCT_COPY_FILES += \
 	device/samsung/nevisp/ramdisk/init.rhea_ss_nevisp.rc:root/init.rhea_ss_nevisp.rc \
 	device/samsung/nevisp/ramdisk/init.bcm2165x.usb.rc:root/init.bcm2165x.usb.rc \
-        device/samsung/nevisp/ramdisk/init.environ.rc:root/init.environ.rc \
 	device/samsung/nevisp/ramdisk/init.log.rc:root/init.log.rc \
 	device/samsung/nevisp/ramdisk/init.bt.rc:root/init.bt.rc \
         device/samsung/nevisp/ramdisk/init.rc:root/init.rc \
@@ -37,17 +36,6 @@ PRODUCT_COPY_FILES += \
 	device/samsung/nevisp/keymaps/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl \
 	device/samsung/nevisp/keymaps/Vendor_04e8_Product_7021.kl:system/usr/keylayout/Vendor_04e8_Product_7021.kl 
 
-#Samsung framework files (TEST NOT FOR MASTER BRANCH YET)
-PRODUCT_COPY_FILES += \
-        device/samsung/nevisp/secframeworks/seccamera.jar:system/framework/seccamera.jar \
-        device/samsung/nevisp/secframeworks/sec_edm.jar:system/framework/sec_edm.jar \
-        device/samsung/nevisp/secframeworks/secface.jar:system/framework/secface.jar \
-        device/samsung/nevisp/secframeworks/sec_feature.jar:system/framework/sec_feature.jar \
-        device/samsung/nevisp/secframeworks/sechardware.jar:system/framework/sechardware.jar \
-        device/samsung/nevisp/secframeworks/secmediarecorder.jar:system/framework/secmediarecorder.jar \
-        device/samsung/nevisp/secframeworks/sec_platform_library.jar:system/framework/sec_platform_library.jar 
-
-#Idk what it does but it got needed in cm10 so for testing including it :P
 PRODUCT_COPY_FILES += \
         device/samsung/nevisp/gfx.fw:system/vendor/gfx.fw
 
@@ -93,6 +81,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
 	frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+        frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
 	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
 	frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
 	frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
@@ -121,16 +110,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=0 \
     ro.telephony.call_ring=0 \
     ro.config.low_ram=true
-    
-# RIL
-PRODUCT_PROPERTY_OVERRIDES += \
-    rild.libpath=/system/lib/libbrcm_ril.so \
-    ro.ril.disable.power.collapse=0 \
-    ro.ril.gprsclass=10 \
-    ro.ril.hsxpa=1 \
-    ro.telephony.call_ring.delay=0 \
-    ro.telephony.default_network=0 \
-    ro.telephony.ril.v3=icccardstatus,datacall,signalstrength,facilitylock
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector

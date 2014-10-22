@@ -1,4 +1,5 @@
 import init.bcm2165x.usb.rc
+import init.bt.rc
 import init.log.rc
 
 on early-init
@@ -196,6 +197,22 @@ on boot
 	mkdir /data/gps 0770 gps system
     chown gps system /data/gps
 	chmod 0770 /data/gps
+    chown gps system /system/etc/gps/glconfig.xml
+    chmod 0660 /system/etc/gps/glconfig.xml
+	chown gps system /system/etc/gps
+
+	chmod 0770 /system/etc/gps
+	chown gps system /system/bin/glgps
+	chmod 0770 /system/bin/glgps
+
+	chown gps system /system/bin/gpslogd
+	chmod 0777 /system/bin/gpslogd
+
+    chmod 0777 /dev/i2c-1
+    chmod 0777 /proc/i2c/i2c1/rxFIFO
+
+    chown gps system /dev/gps_irq
+    chmod 0660 /dev/gps_irq
 
     write /sys/class/gpio/export 28
     chown gps system /sys/class/gpio/gpio28/value
@@ -209,14 +226,6 @@ on boot
     write /sys/class/gpio/gpio97/direction out
     write /sys/class/gpio/gpio97/value 0
 
-    chmod 0777 /dev/i2c-1
-    chmod 0777 /proc/i2c/i2c1/rxFIFO
-
-    chown gps system /dev/gps_irq
-    chmod 0660 /dev/gps_irq
-
-    class_start default
-    
 #for bluetooth. permission for host interface
     chown root bluetooth /dev/ttyS0
     chmod 0777 /dev/ttyS0
@@ -475,3 +484,7 @@ service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1
     class late_start
     disabled
 
+# enable KSM
+    write /sys/kernel/mm/ksm/pages_to_scan 100
+    write /sys/kernel/mm/ksm/sleep_millisecs 500
+    write /sys/kernel/mm/ksm/run 1
