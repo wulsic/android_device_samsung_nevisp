@@ -17,7 +17,7 @@
 
 <resources xmlns:xliff="urnasis:names:tc:xliff:document:1.2 ">
     <!-- I9082L-specific ISO entries -->
-    <string-array name="pref_camera_iso_entries">
+    <string-array name="pref_camera_iso_entries" translatable="false">
          <item>@string/pref_camera_iso_entry_auto</item>
          <item>@string/pref_camera_iso_entry_iso100</item>
          <item>@string/pref_camera_iso_entry_iso200</item>
@@ -25,11 +25,11 @@
          <item>@string/pref_camera_iso_entry_iso800</item>
     </string-array>
 
-    <string-array name="pref_camera_iso_entryvalues">
-         <item>@string/pref_camera_iso_value_auto</item>
-         <item>100</item>
-         <item>200</item>
-         <item>400</item>
-         <item>800</item>
+    <string-array name="pref_camera_iso_entryvalues" translatable="false">
+         <item>auto</item>
+         <item>ISO100</item>
+         <item>ISO200</item>
+         <item>ISO400</item>
+         <item>ISO800</item>
      </string-array>
 </resources>
