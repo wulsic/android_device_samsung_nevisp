@@ -102,7 +102,7 @@ BOARD_HAL_STATIC_LIBRARIES := libhealthd.rhea
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/android0/f_mass_storage/lun%d/file"
 
 # CMHW
-BOARD_HARDWARE_CLASS :=hardware/samsung/cmhw/ device/samsung/nevisp/cmhw/
+BOARD_HARDWARE_CLASS :=device/samsung/nevisp/cmhw/
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
