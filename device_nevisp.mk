@@ -62,6 +62,9 @@ PRODUCT_PACKAGES += \
         audio.r_submix.default \
         audio_policy.rhea
 
+PRODUCT_PACKAGES += \
+    libnetcmdiface
+
 # Device-specific packages
 PRODUCT_PACKAGES += \
 	SamsungServiceMode 
