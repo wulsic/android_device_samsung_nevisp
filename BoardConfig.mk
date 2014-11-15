@@ -61,18 +61,30 @@ WIFI_BAND                   := 802_11_ABG
 # Wi-Fi Tethering
 BOARD_HAVE_SAMSUNG_WIFI := true
 
-# Hardware rendering
+# Graphics
 USE_OPENGL_RENDERER := true
-BOARD_EGL_CFG := device/samsung/nevisp/egl.cfg
+BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
 BOARD_USE_MHEAP_SCREENSHOT := true
+ENABLE_WEBGL := true
+
+# EGL
+BOARD_EGL_CFG := device/samsung/nevisp/egl.cfg
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
+MAX_EGL_CACHE_KEY_SIZE := 4096
+MAX_EGL_CACHE_SIZE := 2146304
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+TARGET_DISABLE_TRIPLE_BUFFERING := false
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 BOARD_EGL_NEEDS_FNW := true
+BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
+
+#Global Flags for the device patches
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS -DRHEA_HWC
 COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB -DEGL_NEEDS_FNW
 
 # FM Radio
 BOARD_HAVE_FM_RADIO := true
+BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
 
 # Screen
 TARGET_SCREEN_HEIGHT := 480
@@ -104,6 +116,8 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/android0/f_mass_stora
 # CMHW
 BOARD_HARDWARE_CLASS :=device/samsung/nevisp/cmhw/
 
+ifeq ($(HAVE_SELINUX),true)
+
 # SELinux
 BOARD_SEPOLICY_DIRS += \
     device/samsung/nevisp/sepolicy
@@ -111,7 +125,12 @@ BOARD_SEPOLICY_DIRS += \
 BOARD_SEPOLICY_UNION += \
     file_contexts \
 
-#twrp
+endif
+
+# Skip DroidDoc to save Build Time
+BOARD_SKIP_ANDROID_DOC_BUILD := true
+
+#TWRP RECOVERY
 DEVICE_RESOLUTION := 320x480
 #RECOVERY_GRAPHICS_USE_LINELENGTH := true
 #RECOVERY_SDCARD_ON_DATA := true
