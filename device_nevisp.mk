@@ -40,6 +40,7 @@ PRODUCT_COPY_FILES += \
 	device/samsung/nevisp/rootdir/init.bcm2165x.usb.rc:root/init.bcm2165x.usb.rc \
 	device/samsung/nevisp/rootdir/init.log.rc:root/init.log.rc \
 	device/samsung/nevisp/rootdir/init.bt.rc:root/init.bt.rc \
+	device/samsung/nevisp/rootdir/init.rc:root/init.rc \
 	device/samsung/nevisp/rootdir/lpm.rc:root/lpm.rc \
 	device/samsung/nevisp/rootdir/ueventd.rhea_ss_nevisp.rc:root/ueventd.rhea_ss_nevisp.rc \
         device/samsung/nevisp/rootdir/init.recovery.rhea_ss_nevisp.rc:root/init.recovery.rhea_ss_nevisp.rc \

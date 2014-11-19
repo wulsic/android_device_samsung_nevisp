@@ -125,12 +125,12 @@ loglevel 3
     chmod 0644 /dev/xt_qtaguid
 
 on fs
-## mount mtd partitions
-#    # Mount /system rw first to give the filesystem a chance to save a checkpoint
-#    mount yaffs2 mtd@system /system
-#    mount yaffs2 mtd@system /system ro remount
-#    mount yaffs2 mtd@userdata /data nosuid nodev
-#    mount yaffs2 mtd@cache /cache nosuid nodev
+# mount mtd partitions
+    # Mount /system rw first to give the filesystem a chance to save a checkpoint
+    mount yaffs2 mtd@system /system
+    mount yaffs2 mtd@system /system ro remount
+    mount yaffs2 mtd@userdata /data nosuid nodev
+    mount yaffs2 mtd@cache /cache nosuid nodev
 
 on post-fs
     # once everything is setup, no need to modify /
@@ -140,7 +140,7 @@ on post-fs
     chown system system /data
     chmod 0771 /data
 
-    # Same reason as /data above
+    # We chown/chmod /cache again so because mount is run as root + defaults
     chown system cache /cache
     chmod 0770 /cache
 
@@ -679,18 +679,12 @@ service ueventd /sbin/ueventd
     class core
     critical
 
-#service console /system/bin/sh
-#    class core
-#    console
-#    disabled
-#    group log
-
-#service console_user /system/bin/sh
-#    class core
-#    console
-#    disabled
-#    user shell
-#    group shell log
+service console /system/bin/sh
+    class core
+    console
+    disabled
+    user shell
+    group log
 
 on property:ro.debuggable=1
     start console
@@ -742,31 +736,19 @@ service netd /system/bin/netd
 service debuggerd /system/bin/debuggerd
     class main
 
-#service DR-daemon /system/bin/ddexe
-#    class main
-#    user root
-#    group system radio inet net_raw
+service ril-daemon /system/bin/rild
+    class main
+    socket rild stream 660 root radio
+    socket rild-debug stream 660 radio system
+    user root
+    group radio cache inet misc audio sdcard_r sdcard_rw qcom_oncrpc qcom_diag log
 
-#service KIES-daemon /system/bin/kiesexe
-#    class main
-#    user root
-#    group system radio inet net_raw
+service surfaceflinger /system/bin/surfaceflinger
+    class main
+    user system
+    group graphics
+    onrestart restart zygote
 
-#service SMD-daemon /system/bin/smdexe
-#    class main
-#    user root
-#    group system radio inet net_raw
-
-#service DTT-daemon /system/bin/dttexe
-#    class main
-#    user root
-#    group system radio inet net_raw
-
-#service BCS-daemon /system/bin/connfwexe
-#    class main
-#    user root
-#    group system radio inet net_raw
-   
 service mobex-daemon /system/bin/npsmobex
     class main
     user system
@@ -790,25 +772,14 @@ service zygote /system/bin/app_process -Xzygote /system/bin --zygote --start-sys
 service drm /system/bin/drmserver
     class main
     user drm
-# [ SEC_MM_DRM
-# fix
     group system drm inet drmrpc sdcard_rw media_rw sdcard_r radio
-# org
-#   group drm system inet drmrpc sdcard_r
-# ]
+
 
 service media /system/bin/mediaserver
     class main
     user media
     group system audio camera inet net_bt net_bt_admin net_bw_acct drmrpc sdcard_rw sdcard_r skt lgt_gid media_rw
     ioprio rt 4
-
-service powersnd /system/bin/samsungpowersoundplay
-    class main
-    user media
-    group system
-    disabled
-    oneshot
 
 service bootanim /system/bin/bootanimation
     class main
@@ -883,17 +854,6 @@ service dumpstate /system/bin/dumpstate -s
 #    group shell
 #    oneshot
 
-## service for TZPR provisioning version check app
-#service scranton_RD /system/bin/scranton_RD
-#     class main
-#    user root
-#    disabled
-#    oneshot
-
-## start for TZPR provisioning version check app
-#on property:sys.mobicoredaemon.enable=true
-#    start scranton_RD
-
 service sshd /system/bin/start-ssh
     class main
     disabled
@@ -905,13 +865,6 @@ service mdnsd /system/bin/mdnsd
     socket mdnsd stream 0660 mdnsr inet
     disabled
     oneshot
-
-# SA, System SW, SAMSUNG
-service bugreport /system/bin/bugmailer.sh -v
-	class main
-	disabled
-	oneshot
-	keycodes 114 115 116
 
 ## icd
 #service icd /system/bin/icd
