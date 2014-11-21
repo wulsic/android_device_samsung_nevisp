@@ -121,6 +121,9 @@ BOARD_HAL_STATIC_LIBRARIES := libhealthd.rhea
 # UMS
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/android0/f_mass_storage/lun%d/file"
 
+# jemalloc causes a lot of random crash on free()
+MALLOC_IMPL := dlmalloc
+
 # CMHW
 BOARD_HARDWARE_CLASS :=device/samsung/nevisp/cmhw/
 
