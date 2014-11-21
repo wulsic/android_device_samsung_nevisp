@@ -7,7 +7,7 @@ $(call inherit-product-if-exists, vendor/samsung/nevisp/nevisp-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/samsung/nevisp/overlay
 
-# LDPI assets
+# MDPI assets
 PRODUCT_AAPT_CONFIG := normal ldpi mdpi nodpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
 #$(call inherit-product, device/mdpi-common/mdpi.mk)
@@ -154,6 +154,12 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 # Boot animation
 TARGET_SCREEN_HEIGHT := 480
 TARGET_SCREEN_WIDTH := 320
+
+# Override phone-hdpi-512-dalvik-heap to match value on stock
+# - helps pass CTS com.squareup.okhttp.internal.spdy.Spdy3Test#tooLargeDataFrame)
+# (property override must come before included property)
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.heapgrowthlimit=56m \
 
 # Dalvik heap config
 include frameworks/native/build/phone-hdpi-512-dalvik-heap.mk

@@ -1,7 +1,4 @@
-bin/at_distributor
 bin/atrace
-bin/atx
-bin/atxd
 bin/BCM4334B0_002.001.013.0679.0873.hcd
 bin/bkmgrd
 bin/bluetoothd
@@ -50,7 +47,6 @@ lib/lib_SoundAlive_V01013h.so
 lib/libat.so
 lib/libacdapi_azi.so
 lib/libat_stubs.so
-lib/libatlog.so
 lib/libbrcm_ril.so
 lib/libbralloc.so
 lib/libbrcmcutils.so
