@@ -124,6 +124,9 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/android0/f_mass_stora
 # jemalloc causes a lot of random crash on free()
 MALLOC_IMPL := dlmalloc
 
+# Enable Minikin text layout engine
+USE_MINIKIN := true
+
 # CMHW
 BOARD_HARDWARE_CLASS :=device/samsung/nevisp/cmhw/
 
