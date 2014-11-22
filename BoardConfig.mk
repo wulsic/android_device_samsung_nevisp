@@ -127,6 +127,12 @@ MALLOC_IMPL := dlmalloc
 # Enable Minikin text layout engine
 USE_MINIKIN := true
 
+# Use set_perm (no selinux version) instead of set_metadata (selinux version)
+USE_SET_METADATA := false
+# KitKat uses selinux enforcing mode by default
+PRODUCT_PROPERTY_OVERRIDES += \
+ro.boot.selinux=disabled
+
 # CMHW
 BOARD_HARDWARE_CLASS :=device/samsung/nevisp/cmhw/
 
