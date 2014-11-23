@@ -38,16 +38,6 @@ PRODUCT_COPY_FILES += \
 	device/samsung/nevisp/keymaps/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl \
 	device/samsung/nevisp/keymaps/Vendor_04e8_Product_7021.kl:system/usr/keylayout/Vendor_04e8_Product_7021.kl 
 
-#Samsung framework files (TEST NOT FOR MASTER BRANCH YET)
-PRODUCT_COPY_FILES += \
-        device/samsung/nevisp/secframeworks/seccamera.jar:system/framework/seccamera.jar \
-        device/samsung/nevisp/secframeworks/sec_edm.jar:system/framework/sec_edm.jar \
-        device/samsung/nevisp/secframeworks/secface.jar:system/framework/secface.jar \
-        device/samsung/nevisp/secframeworks/sec_feature.jar:system/framework/sec_feature.jar \
-        device/samsung/nevisp/secframeworks/sechardware.jar:system/framework/sechardware.jar \
-        device/samsung/nevisp/secframeworks/secmediarecorder.jar:system/framework/secmediarecorder.jar \
-        device/samsung/nevisp/secframeworks/sec_platform_library.jar:system/framework/sec_platform_library.jar
-
 PRODUCT_COPY_FILES += \
         device/samsung/nevisp/gfx.fw:system/vendor/gfx.fw
 
