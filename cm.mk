@@ -14,7 +14,7 @@ $(call inherit-product, device/samsung/nevisp/device_nevisp.mk)
 PRODUCT_DEVICE := nevisp
 PRODUCT_NAME := cm_nevisp
 PRODUCT_BRAND := samsung
-PRODUCT_MODEL := GT-S6810
+PRODUCT_MODEL := GT-S6810P
 PRODUCT_MANUFACTURER := samsung
 
 #Set build fingerprint / ID / Prduct Name ect.
