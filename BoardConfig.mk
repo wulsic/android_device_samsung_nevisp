@@ -124,6 +124,10 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/android0/f_mass_stora
 # jemalloc causes a lot of random crash on free()
 MALLOC_IMPL := dlmalloc
 
+# Odex to increase average performance and boottime
+WITH_DEXPREOPT := true
+WITH_DEXPREOPT_BOOT_IMG_ONLY := false
+
 # Enable Minikin text layout engine
 USE_MINIKIN := true
 
@@ -135,8 +139,6 @@ ro.boot.selinux=permissive
 
 # CMHW
 BOARD_HARDWARE_CLASS :=device/samsung/nevisp/cmhw/
-
-ifeq ($(HAVE_SELINUX),true)
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
@@ -160,7 +162,6 @@ BOARD_SEPOLICY_UNION += \
     tvserver.te \
     vclmk.te \
 
-endif
 
 # Skip DroidDoc to save Build Time
 BOARD_SKIP_ANDROID_DOC_BUILD := true

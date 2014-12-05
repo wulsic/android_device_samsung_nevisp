@@ -7,9 +7,10 @@ $(call inherit-product-if-exists, vendor/samsung/nevisp/nevisp-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/samsung/nevisp/overlay
 
-# MDPI assets
-PRODUCT_AAPT_CONFIG := normal ldpi mdpi nodpi
+# This device has a MDPI Screen
+PRODUCT_AAPT_CONFIG := normal mdpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
+PRODUCT_LOCALES += mdpi
 #$(call inherit-product, device/mdpi-common/mdpi.mk)
 
 # Init files
@@ -25,6 +26,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
+	frameworks/av/media/libstagefright/data/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
         device/samsung/nevisp/media_codecs.xml:system/etc/media_codecs.xml \
 
 # Prebuilt kl keymaps
@@ -67,7 +69,8 @@ PRODUCT_PACKAGES += \
 
 # Device-specific packages
 PRODUCT_PACKAGES += \
-	SamsungServiceMode 
+	SamsungServiceMode \
+	Torch
 	
 
 # Charger
@@ -150,7 +153,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapgrowthlimit=56m \
 
 # Dalvik heap config
-$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk
+include frameworks/native/build/phone-hdpi-512-dalvik-heap.mk
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise

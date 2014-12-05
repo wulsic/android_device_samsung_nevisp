@@ -29,6 +29,12 @@
 
     <!-- Lollipop's new animation doesn't work for us. Use fade -->
     <bool name="config_animateScreenLights">true</bool>
+	
+	<!--  Maximum number of supported users -->
+    <integer name="config_multiuserMaximumUsers">4</integer>
+
+    <!-- Whether UI for multi user should be shown -->
+    <bool name="config_enableMultiUserUI">true</bool>
 
     <!-- disable menu hard key on Crespo in non-pattern lockscreen -->
     <bool name="config_disableMenuKeyInLockScreen">true</bool>
