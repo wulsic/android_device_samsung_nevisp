@@ -1,18 +1,3 @@
-Skip to content
- This repository
-Explore
-Gist
-Blog
-Help
-Winston wulsic
- 
-6  Watch 
-  Star 8
- Fork 57pawitp/android_device_samsung_i9082
- tree: cf61aa5d26  android_device_samsung_i9082/overlay/frameworks/base/core/res/res/values/config.xml
-Pawit Pornkitprasanpawitp 7 days ago i9082: use fade screen off animation
-1 contributor
-220 lines (184 sloc)  9.407 kb RawBlameHistory  
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 /*
