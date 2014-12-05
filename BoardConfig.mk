@@ -15,6 +15,11 @@ TARGET_ARCH_LOWMEM := true
 
 TARGET_BOOTLOADER_BOARD_NAME := rhea
 
+# Don't generate block mode update zips
+BLOCK_BASED_OTA := false
+
+
+#Kernel
 BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 mem=456M androidboot.console=ttsyS1 gpt v3d_mem=67108864 pmem=24M@0x9E800000 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x82000000
 BOARD_KERNEL_PAGESIZE := 4096
@@ -71,6 +76,8 @@ BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
 BOARD_USE_MHEAP_SCREENSHOT := true
 ENABLE_WEBGL := true
 
+BOARD_USE_USB_MASS_STORAGE_SWITCH := true
+
 # EGL
 BOARD_EGL_CFG := device/samsung/nevisp/egl.cfg
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
@@ -124,15 +131,25 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/android0/f_mass_stora
 # jemalloc causes a lot of random crash on free()
 MALLOC_IMPL := dlmalloc
 
-# Odex to increase average performance and boottime
-WITH_DEXPREOPT := true
-WITH_DEXPREOPT_BOOT_IMG_ONLY := false
+# Enable dex-preoptimization to speed up first boot sequence
+ifeq ($(HOST_OS),linux)
+  ifeq ($(TARGET_BUILD_VARIANT),userdebug)
+    ifeq ($(WITH_DEXPREOPT),)
+      WITH_DEXPREOPT := true
+    endif
+  endif
+endif
+DONT_DEXPREOPT_PREBUILTS := true
+
+# Use Cpu Upload path (webkit)
+TARGET_FORCE_CPU_UPLOAD := true
 
 # Enable Minikin text layout engine
 USE_MINIKIN := true
 
 # Use set_perm (no selinux version) instead of set_metadata (selinux version)
 USE_SET_METADATA := false
+
 # KitKat uses selinux enforcing mode by default
 PRODUCT_PROPERTY_OVERRIDES += \
 ro.boot.selinux=permissive
@@ -167,7 +184,7 @@ BOARD_SEPOLICY_UNION += \
 BOARD_SKIP_ANDROID_DOC_BUILD := true
 
 #TWRP RECOVERY
-DEVICE_RESOLUTION := 320x480
+#DEVICE_RESOLUTION := 320x480
 #RECOVERY_GRAPHICS_USE_LINELENGTH := true
 #RECOVERY_SDCARD_ON_DATA := true
 #BOARD_HAS_NO_REAL_SDCARD := true
