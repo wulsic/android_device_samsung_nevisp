@@ -17,8 +17,6 @@ PRODUCT_COPY_FILES += \
 	device/samsung/nevisp/ramdisk/init.rhea_ss_nevisp.rc:root/init.rhea_ss_nevisp.rc \
 	device/samsung/nevisp/ramdisk/init.bcm2165x.usb.rc:root/init.bcm2165x.usb.rc \
 	device/samsung/nevisp/ramdisk/init.log.rc:root/init.log.rc \
-	device/samsung/nevisp/ramdisk/init.bt.rc:root/init.bt.rc \
-        device/samsung/nevisp/ramdisk/init.rc:root/init.rc \
 	device/samsung/nevisp/ramdisk/ueventd.rhea_ss_nevisp.rc:root/ueventd.rhea_ss_nevisp.rc \
         device/samsung/nevisp/ramdisk/init.recovery.rhea_ss_nevisp.rc:root/init.recovery.rhea_ss_nevisp.rc \
 	device/samsung/nevisp/ramdisk/fstab.rhea_ss_nevisp:root/fstab.rhea_ss_nevisp 
