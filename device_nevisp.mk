@@ -29,18 +29,6 @@ PRODUCT_COPY_FILES += \
 	frameworks/av/media/libstagefright/data/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
         device/samsung/nevisp/media_codecs.xml:system/etc/media_codecs.xml \
 
-# Prebuilt kl keymaps
-PRODUCT_COPY_FILES += \
-	device/samsung/nevisp/keymaps/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
-	device/samsung/nevisp/keymaps/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
-	device/samsung/nevisp/keymaps/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
-	device/samsung/nevisp/keymaps/Generic.kl:system/usr/keylayout/Generic.kl \
-	device/samsung/nevisp/keymaps/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl \
-	device/samsung/nevisp/keymaps/Vendor_04e8_Product_7021.kl:system/usr/keylayout/Vendor_04e8_Product_7021.kl 
-
-PRODUCT_COPY_FILES += \
-        device/samsung/nevisp/gfx.fw:system/vendor/gfx.fw
-
 # Screen
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=160 \
