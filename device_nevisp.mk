@@ -8,8 +8,6 @@ $(call inherit-product-if-exists, vendor/samsung/nevisp/nevisp-vendor.mk)
 DEVICE_PACKAGE_OVERLAYS += device/samsung/nevisp/overlay
 
 # This device has a MDPI Screen
-PRODUCT_AAPT_CONFIG := normal mdpi
-PRODUCT_AAPT_PREF_CONFIG := mdpi
 PRODUCT_LOCALES += mdpi
 #$(call inherit-product, device/mdpi-common/mdpi.mk)
 
@@ -35,6 +33,24 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.display_rotation=0 \
     ro.lcd_brightness=170 \
     ro.lcd_min_brightness=30
+    
+# The OpenGL ES API level that is natively supported by this device.
+# This is a 16.16 fixed point number. -> Opengles 2.0
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.opengles.version=131072
+
+PRODUCT_PROPERTY_OVERRIDES += \
+ro.media.enc.jpeg.quality = 150 \
+net.tcp.buffersize.default=4096,87380,256960,4096,16384,256960 \
+net.tcp.buffersize.wifi=4096,87380,256960,4096,16384,256960 \
+net.tcp.buffersize.umts=4096,87380,256960,4096,16384,256960 \
+net.tcp.buffersize.gprs=4096,87380,256960,4096,16384,256960 \
+net.tcp.buffersize.edge=4096,87380,256960,4096,16384,256960 \
+net.rmnet0.dns1=8.8.8.8 \
+net.rmnet0.dns2=8.8.4.4 \
+net.dns1=8.8.8.8 \
+net.dns2=8.8.4.4 \
+persist.adb.notify=1
 
 
 # Filesystem management tools
@@ -57,8 +73,10 @@ PRODUCT_PACKAGES += \
 
 # Device-specific packages
 PRODUCT_PACKAGES += \
-	SamsungServiceMode \
-	Torch
+	SamsungServiceMode 
+	
+# Fancy Light App
+PRODUCT_PACKAGES += Torch
 	
 
 # Charger
@@ -112,7 +130,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring=0 \
     ro.config.low_ram=true
 
-# enable Google-specific location features,
+# Disable JIT code cache to free up some ram when the device is running
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.jit.codecachesize=0
+
+# Enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.locationfeatures=1 \
@@ -138,7 +160,7 @@ TARGET_SCREEN_WIDTH := 320
 # - helps pass CTS com.squareup.okhttp.internal.spdy.Spdy3Test#tooLargeDataFrame)
 # (property override must come before included property)
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.heapgrowthlimit=56m \
+    dalvik.vm.heapgrowthlimit=48m \
 
 # Dalvik heap config
 include frameworks/native/build/phone-hdpi-512-dalvik-heap.mk

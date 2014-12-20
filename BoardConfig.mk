@@ -18,6 +18,8 @@ TARGET_BOOTLOADER_BOARD_NAME := rhea
 # Don't generate block mode update zips
 BLOCK_BASED_OTA := false
 
+# Lollipop removes supports for NON PIE executables
+TARGET_NEEDS_NON_PIE_SUPPORT := true
 
 #Kernel
 BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 mem=456M androidboot.console=ttsyS1 gpt v3d_mem=67108864 pmem=24M@0x9E800000 androidboot.selinux=permissive
@@ -104,6 +106,9 @@ BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
 # Screen
 TARGET_SCREEN_HEIGHT := 480
 TARGET_SCREEN_WIDTH := 320
+
+# Media
+TARGET_NO_ADAPTIVE_PLAYBACK := true
 
 # Audio
 COMMON_GLOBAL_CFLAGS += -DMR0_AUDIO_BLOB
