@@ -10,19 +10,20 @@ DEVICE_PACKAGE_OVERLAYS += device/samsung/corsica/overlay
 # LDPI assets
 PRODUCT_AAPT_CONFIG := normal ldpi mdpi nodpi
 PRODUCT_AAPT_PREF_CONFIG := ldpi
+#$(call inherit-product-if-exists, device/ldpi-common/ldpi.mk)
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 320
 TARGET_SCREEN_WIDTH := 240
 
-DEVICE_PACKAGE_OVERLAYS += device/samsung/corsica/overlay
-
-LOCAL_PATH := device/samsung/corsica
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-        LOCAL_KERNEL := $(LOCAL_PATH)/kernel
+LOCAL_KERNEL := device/samsung/corsica/kernel
 else
-        LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
+
+PRODUCT_COPY_FILES := \
+    $(LOCAL_KERNEL):kernel
 
 # Init files
 PRODUCT_COPY_FILES += \
@@ -30,10 +31,18 @@ PRODUCT_COPY_FILES += \
 	device/samsung/corsica/init.bcm2165x.usb.rc:root/init.bcm2165x.usb.rc \
 	device/samsung/corsica/init.log.rc:root/init.log.rc \
 	device/samsung/corsica/init.bt.rc:root/init.bt.rc \
-	device/samsung/corsica/lpm.rc:root/lpm.rc \
+        device/samsung/corsica/lpm.rc:root/lpm.rc \
 	device/samsung/corsica/ueventd.rhea_ss_corsica.rc:root/ueventd.rhea_ss_corsica.rc \
         device/samsung/corsica/init.recovery.rhea_ss_corsica.rc:root/init.recovery.rhea_ss_corsica.rc \
 	device/samsung/corsica/fstab.rhea_ss_corsica:root/fstab.rhea_ss_corsica 
+
+PRODUCT_COPY_FILES += \
+        frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+        frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
+        frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
+        frameworks/av/media/libstagefright/data/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
+        device/samsung/corsica/media_codecs.xml:system/etc/media_codecs.xml \
+        device/samsung/corsica/media_profiles.xml:system/etc/media_profiles.xml \
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
@@ -41,7 +50,17 @@ PRODUCT_COPY_FILES += \
 	device/samsung/corsica/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
 	device/samsung/corsica/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
 	device/samsung/corsica/Generic.kl:system/usr/keylayout/Generic.kl \
-	device/samsung/corsica/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl 
+	device/samsung/corsica/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl
+
+# Stagefright
+PRODUCT_PROPERTY_OVERRIDES += \
+        media.stagefright.enable-player=true \
+        media.stagefright.enable-meta=false \
+        media.stagefright.enable-scan=true \
+        media.stagefright.enable-http=true \
+        media.stagefright.enable-fma2dp=true \
+        media.stagefright.enable-aac=true \
+        media.stagefright.enable-qcp=true
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -51,11 +70,15 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	com.android.future.usb.accessory
 
-# Misc other modules
+# Audio modules
 PRODUCT_PACKAGES += \
 	audio.a2dp.default \
 	audio.usb.default \
-        audio_policy.rhea
+        audio.r_submix.default \
+        audio.primary.rhea \
+        audio.policy.rhea \
+        libaudio-resampler \
+        hwprops \
 
 # Device-specific packages
 PRODUCT_PACKAGES += \
@@ -82,12 +105,18 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
 	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
 
-
 # Support for Browser's saved page feature. This allows
 # for pages saved on previous versions of the OS to be
 # viewed on the current OS.
 PRODUCT_PACKAGES += \
     libskia_legacy
+
+# Building with wpa_supplicant binary
+PRODUCT_PACKAGES += \
+    dhcpcd.conf \
+    wpa_supplicant \
+    wpa_supplicant.conf \
+    hostapad \
 
 # These are the hardware-specific settings that are stored in system properties.
 # Note that the only such settings should be the ones that are too low-level to
@@ -116,6 +145,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.checkjni=0 \
     dalvik.vm.checkjni=false
 
+## Graphics
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.force_highendgfx=1
+    
 # KSM
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.ksm.default=1
@@ -123,6 +156,29 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # MTP
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
+
+# Enable AAC 5.1 output
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.aac_51_output_enabled=true
+
+# Input resampling configuration
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.input.noresample=1
+
+# Audio Configuration
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.audio.handset.mic.type=digital \
+    persist.audio.dualmic.config=endfire \
+    persist.audio.fluence.voicecall=true \
+    persist.audio.fluence.voicerec=false \
+    persist.audio.fluence.speaker=false \
+    af.resampler.quality=4
+
+# Override phone-hdpi-512-dalvik-heap to match value on stock
+# - helps pass CTS com.squareup.okhttp.internal.spdy.Spdy3Test#tooLargeDataFrame)
+# (property override must come before included property)
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.heapgrowthlimit=56m \
 
 # Dalvik heap config
 include frameworks/native/build/phone-hdpi-512-dalvik-heap.mk

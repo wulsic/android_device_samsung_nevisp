@@ -14,9 +14,6 @@ Patches used ;
 
 Credits; 
 
-1. pawitp 
-2. K2wl
-3. Unjustified Dev
-4. Dhinesh77
-
+1. Dhinesh77
+2. pawitp
 ==============================================

@@ -1,4 +1,3 @@
-## Specify phone tech before including full_phone
 $(call inherit-product, vendor/cm/config/gsm.mk)
 
 # Release name
@@ -18,4 +17,4 @@ PRODUCT_MODEL := GT-S5312
 PRODUCT_MANUFACTURER := samsung
 
 #Set build fingerprint / ID / Prduct Name ect.
-PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=corsicamw TARGET_DEVICE=corsica BUILD_FINGERPRINT=samsung/corsicamw/corsica:4.1.2/JZO54K/S5312DDAMG1:user/release-keys PRIVATE_BUILD_DESC="corsicadd-user 4.1.2 JZO54K S5312DDAMG1 release-keys"
+PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=corsicadd TARGET_DEVICE=corsica BUILD_FINGERPRINT=samsung/corsicadd/corsica:4.1.2/JZO54K/S5312DDAMG1:user/release-keys PRIVATE_BUILD_DESC="corsicadd-user 4.1.2 JZO54K S5312DDAMG1 release-keys"
