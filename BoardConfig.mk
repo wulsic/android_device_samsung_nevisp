@@ -7,9 +7,6 @@ BOARD_USES_LEGACY_MMAP := true
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 
-# boardinfo
-TARGET_BOARD_INFO_FILE := device/samsung/corsica/board-info.txt
-
 # inherit from the proprietary version
 -include vendor/samsung/corsica/BoardConfigVendor.mk
 
@@ -107,7 +104,7 @@ DEVICE_RESOLUTION := 240x240
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/corsica/bluetooth
-BOARD_BLUEDROID_VENDOR_CONF := device/samsung/corsica/libbt_vndcfg.txt
+BOARD_BLUEDROID_VENDOR_CONF := device/samsung/corsica/bluetooth/libbt_vndcfg.txt
 
 # Connectivity - Wi-Fi
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
@@ -135,13 +132,13 @@ BOARD_NO_APSME_ATTR := true
 # Hardware rendering
 USE_OPENGL_RENDERER := true
 HWUI_COMPILE_FOR_PERF := true
-BOARD_EGL_CFG := device/samsung/corsica/egl.cfg
+BOARD_EGL_CFG := device/samsung/corsica/egl/egl.cfg
 BOARD_USE_MHEAP_SCREENSHOT := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 BOARD_EGL_NEEDS_FNW := true
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
-COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB -DEGL_NEEDS_FNW -DMR0_AUDIO_BLOB -DSAMSUNG_BCM_AUDIO_BLOB -DRHEA_HWC -DSAMSUNG_BCM_AUDIO_BLOB -DRHEA_HWC -DWORKAROUND_BUG_10194508=1
+COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB -DEGL_NEEDS_FNW -DMR0_AUDIO_BLOB -DSAMSUNG_BCM_AUDIO_BLOB -DRHEA_HWC -DSAMSUNG_BCM_AUDIO_BLOB -DRHEA_HWC
 OVERRIDE_RS_DRIVER := libRSDriverArm_rhea.so
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 BOARD_USES_HW_MEDIARECORDER := true
@@ -161,7 +158,7 @@ BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charg
 BOARD_RIL_CLASS := ../../../device/samsung/corsica/ril/
 
 # Recovery
-TARGET_RECOVERY_FSTAB := device/samsung/corsica/fstab.rhea_ss_corsica
+TARGET_RECOVERY_FSTAB := device/samsung/corsica/recovery/fstab.rhea_ss_corsica
 BOARD_LDPI_RECOVERY := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := "<font_7x16.h>"
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/corsica/recovery/recovery_keys.c
