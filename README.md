@@ -1,7 +1,7 @@
-Samsung-Galaxy-Pocket-Neo & Duos (S5310/S5312)
+Samsung-Galaxy-Fame- & Duos (S6810/S6812)
 ==============================================
 
-Cyanogenmod 11 device tree for Samsung S5310/s5312
+Cyanogenmod 11 device tree for Samsung S6810/S6812
 
 ==============================================
 
@@ -16,4 +16,7 @@ Credits;
 
 1. Dhinesh77
 2. pawitp
+3. K2wl
+4. Unjustified Dev
+5. Xenon92
 ==============================================

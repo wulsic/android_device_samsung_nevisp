@@ -8,11 +8,11 @@ BOARD_USES_LEGACY_MMAP := true
 BOARD_USES_ALSA_AUDIO := true
 
 # inherit from the proprietary version
--include vendor/samsung/corsica/BoardConfigVendor.mk
+-include vendor/samsung/nevisp/BoardConfigVendor.mk
 
 TARGET_ARCH := arm
 TARGET_NO_BOOTLOADER := true
-TARGET_BOOTLOADER_BOARD_NAME := corsica
+TARGET_BOOTLOADER_BOARD_NAME := nevisp
 TARGET_BOARD_PLATFORM := rhea
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
@@ -76,9 +76,9 @@ BOARD_USE_LEGACY_TOUCHSCREEN := true
 TARGET_PROVIDES_POWER_HAL := true
 
 # Kernel
-#TARGET_KERNEL_SOURCE := kernel/samsung/corsica
-#TARGET_KERNEL_CONFIG := cyanogenmod_corsica_defconfig
-TARGET_PREBUILT_KERNEL := device/samsung/corsica/kernel
+#TARGET_KERNEL_SOURCE := kernel/samsung/nevisp
+#TARGET_KERNEL_CONFIG := cyanogenmod_nevisp_defconfig
+TARGET_PREBUILT_KERNEL := device/samsung/nevisp/kernel
 BOARD_KERNEL_CMDLINE := console=ttyS0,115200n8 mem=456M androidboot.console=ttyS0 gpt v3d_mem=67108864 pmem=24M@0x9E800000
 BOARD_KERNEL_BASE := 0x82000000
 BOARD_KERNEL_PAGESIZE := 4096
@@ -103,8 +103,8 @@ DEVICE_RESOLUTION := 240x240
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/corsica/bluetooth
-BOARD_BLUEDROID_VENDOR_CONF := device/samsung/corsica/bluetooth/libbt_vndcfg.txt
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/nevisp/bluetooth
+BOARD_BLUEDROID_VENDOR_CONF := device/samsung/nevisp/bluetooth/libbt_vndcfg.txt
 
 # Connectivity - Wi-Fi
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
@@ -132,7 +132,7 @@ BOARD_NO_APSME_ATTR := true
 # Hardware rendering
 USE_OPENGL_RENDERER := true
 HWUI_COMPILE_FOR_PERF := true
-BOARD_EGL_CFG := device/samsung/corsica/egl/egl.cfg
+BOARD_EGL_CFG := device/samsung/nevisp/egl/egl.cfg
 BOARD_USE_MHEAP_SCREENSHOT := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
@@ -155,13 +155,13 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 
 # RIL
-BOARD_RIL_CLASS := ../../../device/samsung/corsica/ril/
+BOARD_RIL_CLASS := ../../../device/samsung/nevisp/ril/
 
 # Recovery
-TARGET_RECOVERY_FSTAB := device/samsung/corsica/recovery/fstab.rhea_ss_corsica
+TARGET_RECOVERY_FSTAB := device/samsung/nevisp/recovery/fstab.rhea_ss_nevisp
 BOARD_LDPI_RECOVERY := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := "<font_7x16.h>"
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/corsica/recovery/recovery_keys.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/nevisp/recovery/recovery_keys.c
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 
 # Vold
@@ -177,11 +177,11 @@ BOARD_HAL_STATIC_LIBRARIES := libdumpstate.rhea
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.rhea
 
 # CMHW
-BOARD_HARDWARE_CLASS := hardware/samsung/cmhw/ device/samsung/corsica/cmhw/
+BOARD_HARDWARE_CLASS := hardware/samsung/cmhw/ device/samsung/nevisp/cmhw/
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
-    device/samsung/corsica/sepolicy
+    device/samsung/nevisp/sepolicy
 
 BOARD_SEPOLICY_UNION += \
     file_contexts \

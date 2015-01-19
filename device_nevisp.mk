@@ -3,9 +3,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
-$(call inherit-product-if-exists, vendor/samsung/corsica/corsica-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/nevisp/nevisp-vendor.mk)
 
-DEVICE_PACKAGE_OVERLAYS += device/samsung/corsica/overlay
+DEVICE_PACKAGE_OVERLAYS += device/samsung/nevisp/overlay
 
 # LDPI assets
 PRODUCT_AAPT_CONFIG := normal ldpi mdpi nodpi
@@ -17,7 +17,7 @@ TARGET_SCREEN_HEIGHT := 320
 TARGET_SCREEN_WIDTH := 240
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/samsung/corsica/kernel
+LOCAL_KERNEL := device/samsung/nevisp/kernel
 else
 LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
@@ -27,30 +27,30 @@ PRODUCT_COPY_FILES := \
 
 # Init files
 PRODUCT_COPY_FILES += \
-	device/samsung/corsica/recovery/init.rhea_ss_corsica.rc:root/init.rhea_ss_corsica.rc \
-	device/samsung/corsica/recovery/init.bcm2165x.usb.rc:root/init.bcm2165x.usb.rc \
-	device/samsung/corsica/recovery/init.log.rc:root/init.log.rc \
-	device/samsung/corsica/recovery/init.bt.rc:root/init.bt.rc \
-	device/samsung/corsica/recovery/ueventd.rhea_ss_corsica.rc:root/ueventd.rhea_ss_corsica.rc \
-        device/samsung/corsica/recovery/init.recovery.rhea_ss_corsica.rc:root/init.recovery.rhea_ss_corsica.rc \
-	device/samsung/corsica/recovery/fstab.rhea_ss_corsica:root/fstab.rhea_ss_corsica 
+	device/samsung/nevisp/recovery/init.rhea_ss_nevisp.rc:root/init.rhea_ss_nevisp.rc \
+	device/samsung/nevisp/recovery/init.bcm2165x.usb.rc:root/init.bcm2165x.usb.rc \
+	device/samsung/nevisp/recovery/init.log.rc:root/init.log.rc \
+	device/samsung/nevisp/recovery/init.bt.rc:root/init.bt.rc \
+	device/samsung/nevisp/recovery/ueventd.rhea_ss_nevisp.rc:root/ueventd.rhea_ss_nevisp.rc \
+        device/samsung/nevisp/recovery/init.recovery.rhea_ss_nevisp.rc:root/init.recovery.rhea_ss_nevisp.rc \
+	device/samsung/nevisp/recovery/fstab.rhea_ss_nevisp:root/fstab.rhea_ss_nevisp 
 
 PRODUCT_COPY_FILES += \
         frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
         frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
         frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
         frameworks/av/media/libstagefright/data/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
-        device/samsung/corsica/prebuilt/media_codecs.xml:system/etc/media_codecs.xml \
-        device/samsung/corsica/prebuilt/media_profiles.xml:system/etc/media_profiles.xml \
+        device/samsung/nevisp/prebuilt/media_codecs.xml:system/etc/media_codecs.xml \
+        device/samsung/nevisp/prebuilt/media_profiles.xml:system/etc/media_profiles.xml \
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
-	device/samsung/corsica/keylayouts/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
-	device/samsung/corsica/keylayouts/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
-	device/samsung/corsica/keylayouts/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
-	device/samsung/corsica/keylayouts/Generic.kl:system/usr/keylayout/Generic.kl \
-	device/samsung/corsica/keylayouts/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl \
-        device/samsung/corsica/keylayouts/lpm.rc:root/lpm.rc \
+	device/samsung/nevisp/keylayouts/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
+	device/samsung/nevisp/keylayouts/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
+	device/samsung/nevisp/keylayouts/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+	device/samsung/nevisp/keylayouts/Generic.kl:system/usr/keylayout/Generic.kl \
+	device/samsung/nevisp/keylayouts/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl \
+        device/samsung/nevisp/keylayouts/lpm.rc:root/lpm.rc \
 
 # Stagefright
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -190,5 +190,5 @@ $(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
-PRODUCT_NAME := full_corsica
-PRODUCT_DEVICE := corsica
+PRODUCT_NAME := full_nevisp
+PRODUCT_DEVICE := nevisp

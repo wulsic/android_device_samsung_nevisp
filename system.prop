@@ -1,5 +1,5 @@
 #
-# system.prop for corsica
+# system.prop for nevisp
 #
 persist.brcm.log=none
 persist.brcm.cp_crash=none
@@ -7,9 +7,9 @@ persist.brcm.ap_crash=none
 
 rild.libpath=/system/lib/libbrcm_ril.so
 #rild.libargs=-d /dev/ttyS0
-ro.sf.lcd_density=120
-ro.lcd_brightness=160
-ro.lcd_min_brightness=20
+ro.sf.lcd_density=160
+ro.lcd_brightness=170
+ro.lcd_min_brightness=30
 
 # MultiTouch support
 ro.product.multi_touch_enabled=true
