@@ -12,11 +12,12 @@ Patches used ;
 ==============================================
 
 
-Credits; 
+Credits on alphabetical order; 
 
 1. Dhinesh77
-2. pawitp
+2. Karthick111
 3. K2wl
-4. Unjustified Dev
-5. Xenon92
+4. pawitp
+5. Unjustified Dev
+6. Xenon92
 ==============================================
