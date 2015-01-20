@@ -1,0 +1,68 @@
+From 95cf7f262c6e4be6cd73a9a2491efab14db7f554 Mon Sep 17 00:00:00 2001
+From: Pawit Pornkitprasan <p.pawit@gmail.com>
+Date: Sat, 31 May 2014 12:34:56 +0700
+Subject: [PATCH] telephony: support for RIL that does not send UNSOL_CALL_RING
+
+Samsung Broadcom RIL does not send UNSOL_CALL_RING at all, so it
+needs to be faked or non loop (e.g. Digital Phone) ringtones
+won't work.
+
+Change-Id: Ib7373d32777f6c42ee488972a7aa63ae8e1cd09b
+---
+ .../com/android/internal/telephony/PhoneBase.java     | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+
+diff --git a/src/java/com/android/internal/telephony/PhoneBase.java b/src/java/com/android/internal/telephony/PhoneBase.java
+index b361aae..596c734 100644
+--- a/src/java/com/android/internal/telephony/PhoneBase.java
++++ b/src/java/com/android/internal/telephony/PhoneBase.java
+@@ -150,6 +150,7 @@ public abstract class PhoneBase extends Handler implements Phone {
+     boolean mDnsCheckDisabled;
+     public DcTrackerBase mDcTracker;
+     boolean mDoesRilSendMultipleCallRing;
++    boolean mDoesRilSendCallRing;
+     int mCallRingContinueToken;
+     int mCallRingDelay;
+     public boolean mIsTheCurrentActivePhone = true;
+@@ -326,6 +327,11 @@ public abstract class PhoneBase extends Handler implements Phone {
+                 TelephonyProperties.PROPERTY_RIL_SENDS_MULTIPLE_CALL_RING, true);
+         Rlog.d(LOG_TAG, "mDoesRilSendMultipleCallRing=" + mDoesRilSendMultipleCallRing);
+ 
++        // Some RIL do not even send a single RIL_UNSOL_CALL_RING
++        mDoesRilSendCallRing = SystemProperties.getBoolean(
++                "ro.telephony.call_ring", true);
++        Rlog.d(LOG_TAG, "mDoesRilSendCallRing=" + mDoesRilSendCallRing);
++
+         mCallRingDelay = SystemProperties.getInt(
+                 TelephonyProperties.PROPERTY_CALL_RING_DELAY, 3000);
+         Rlog.d(LOG_TAG, "mCallRingDelay=" + mCallRingDelay);
+@@ -1369,6 +1375,18 @@ public abstract class PhoneBase extends Handler implements Phone {
+     protected void notifyNewRingingConnectionP(Connection cn) {
+         if (!mIsVoiceCapable)
+             return;
++
++        // Fake RIL_UNSOL_CALL_RING if the RIL doesn't send it.
++        // Note that we need the delay to prevent the request from
++        // being sent after CallTracker detects "RINGING" state, but
++        // before the correct contact-specific ringtone is queried.
++        // Otherwise, the incorrect ringtone will be used
++        if (!mDoesRilSendCallRing) {
++            int token = ++mCallRingContinueToken;
++            sendMessageDelayed(
++                    obtainMessage(EVENT_CALL_RING_CONTINUE, token, 0), mCallRingDelay);
++        }
++
+         AsyncResult ar = new AsyncResult(null, cn, null);
+         mNewRingingConnectionRegistrants.notifyRegistrants(ar);
+     }
+@@ -1510,6 +1528,7 @@ public abstract class PhoneBase extends Handler implements Phone {
+         pw.println(" mDnsCheckDisabled=" + mDnsCheckDisabled);
+         pw.println(" mDcTracker=" + mDcTracker);
+         pw.println(" mDoesRilSendMultipleCallRing=" + mDoesRilSendMultipleCallRing);
++        pw.println(" mDoesRilSendCallRing=" + mDoesRilSendCallRing);
+         pw.println(" mCallRingContinueToken=" + mCallRingContinueToken);
+         pw.println(" mCallRingDelay=" + mCallRingDelay);
+         pw.println(" mIsTheCurrentActivePhone=" + mIsTheCurrentActivePhone);
+-- 
+1.9.1
+

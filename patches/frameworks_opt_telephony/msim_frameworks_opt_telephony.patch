@@ -1,0 +1,36 @@
+From 879d04dbd6da85468e7616af9e232184e9284e5d Mon Sep 17 00:00:00 2001
+From: Pawit Pornkitprasan <p.pawit@gmail.com>
+Date: Wed, 13 Aug 2014 12:58:19 +0700
+Subject: [PATCH] telephony: HACK: fix call waiting audio on Dual-SIM
+
+Change-Id: I9978f97cf893512fcce05458d8e5da170aae3fee
+---
+ src/java/com/android/internal/telephony/ExtCallManager.java | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/src/java/com/android/internal/telephony/ExtCallManager.java b/src/java/com/android/internal/telephony/ExtCallManager.java
+index 0a91eb9..646bd04 100644
+--- a/src/java/com/android/internal/telephony/ExtCallManager.java
++++ b/src/java/com/android/internal/telephony/ExtCallManager.java
+@@ -331,6 +331,18 @@ public class ExtCallManager extends CallManager {
+             case RINGING:
+                 if (VDBG) Rlog.d(LOG_TAG, "setAudioMode RINGING");
+                 int curAudioMode = mAudioManager.getMode();
++
++                // HACK: When Dual-SIM is enabled and call waiting occurs,
++                // com.android.phone.CallCommandService.setActiveSubscription
++                // will cause setAudioMode to be called, causing the audio
++                // mode to be chagned to "MODE_RINGTONE", rendering the active
++                // conversation to be inaudiable.
++                // (The setAudioMode() call does not occur without Dual-SIM.)
++                if (curAudioMode == AudioManager.MODE_IN_CALL) {
++                    Rlog.d(LOG_TAG, "Skip MODE_IN_CALL -> MODE_RINGTONE (assume call waiting)");
++                    return;
++                }
++
+                 if (curAudioMode != AudioManager.MODE_RINGTONE) {
+                     // only request audio focus if the ringtone is going to be heard
+                     if (mAudioManager.getStreamVolume(AudioManager.STREAM_RING) > 0) {
+-- 
+1.8.5.2 (Apple Git-48)
+

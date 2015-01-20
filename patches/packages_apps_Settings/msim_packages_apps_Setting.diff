@@ -1,0 +1,83 @@
+From 44dee519bd09ed06ecc66b5bd7984c2d9bcf8901 Mon Sep 17 00:00:00 2001
+From: Pawit Pornkitprasan <p.pawit@gmail.com>
+Date: Sat, 8 Mar 2014 19:34:18 +0700
+Subject: [PATCH] Settings: MSim: remove settings not used on I9082
+
+Change-Id: Ic33db5e60db34cf707116082b1f738918b3a395f
+---
+ res/xml/multi_sim_settings.xml                 | 10 ----------
+ src/com/android/settings/MultiSimSettings.java | 13 -------------
+ 2 files changed, 23 deletions(-)
+
+diff --git a/res/xml/multi_sim_settings.xml b/res/xml/multi_sim_settings.xml
+index 9a7a258..87f1ab9 100644
+--- a/res/xml/multi_sim_settings.xml
++++ b/res/xml/multi_sim_settings.xml
+@@ -31,16 +31,6 @@
+ <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+ 
+-    <PreferenceScreen
+-        android:key="config_sub"
+-        android:title="@string/sel_sub_title"
+-        android:summary="@string/sel_sub_summary"
+-        android:persistent="false">
+-        <intent android:action="android.intent.action.MAIN"
+-                android:targetPackage="com.android.phone"
+-                android:targetClass="com.android.phone.SetSubscription" />
+-    </PreferenceScreen>
+-
+     <CheckBoxPreference
+         android:key="tune_away"
+         android:title="@string/tune_away_title"
+diff --git a/src/com/android/settings/MultiSimSettings.java b/src/com/android/settings/MultiSimSettings.java
+index 646337c..b620c40 100644
+--- a/src/com/android/settings/MultiSimSettings.java
++++ b/src/com/android/settings/MultiSimSettings.java
+@@ -100,7 +100,6 @@ public class MultiSimSettings extends PreferenceActivity implements DialogInterf
+     private ListPreference mVoice;
+     private ListPreference mData;
+     private ListPreference mSms;
+-    private PreferenceScreen mConfigSub;
+     private CharSequence[] entries; // Used for entries like Subscription1, Subscription2 ...
+     private CharSequence[] entryValues; // Used for entryValues like 0, 1 ,2 ...
+     private CharSequence[] summaries; // Used for Summaries like Aubscription1, Subscription2....
+@@ -141,8 +140,6 @@ public class MultiSimSettings extends PreferenceActivity implements DialogInterf
+         mData.setOnPreferenceChangeListener(this);
+         mSms = (ListPreference) findPreference(KEY_SMS);
+         mSms.setOnPreferenceChangeListener(this);
+-        mConfigSub = (PreferenceScreen) findPreference(KEY_CONFIG_SUB);
+-        mConfigSub.getIntent().putExtra(CONFIG_SUB, true);
+         mTuneAway = (CheckBoxPreference) findPreference(TUNE_AWAY);
+         mTuneAway.setOnPreferenceChangeListener(this);
+         mPrioritySub = (ListPreference) findPreference(PRIORITY_SUB);
+@@ -224,14 +221,9 @@ public class MultiSimSettings extends PreferenceActivity implements DialogInterf
+         Log.d(TAG, "mIccCardCount = " + mIccCardCount);
+ 
+         if (mIccCardCount == 0) {
+-             mConfigSub.setEnabled(false);
+-             mConfigSub.setSelectable(false);
+              displayAlertDialog(getResources().getString(R.string.no_sim_info));
+              configureMSimMenu(false);
+         } else if (mIccCardCount == 1) {
+-             //1 SIM card is present. Config sub must be accessible
+-             mConfigSub.setEnabled(true);
+-             mConfigSub.setSelectable(true);
+              configureMSimMenu(false);
+         } else if ( (mIccCardCount > 1) && (mIccCardCount <= MAX_SUBSCRIPTIONS) )  {
+             configureMSimMenu(true);
+@@ -605,11 +597,6 @@ public class MultiSimSettings extends PreferenceActivity implements DialogInterf
+                     }
+ 
+                     break;
+-                case EVENT_SUBSCRIPTION_ACTIVATED:
+-                case EVENT_SUBSCRIPTION_DEACTIVATED:
+-                    updateMultiSimEntriesForVoice();
+-                    updateMultiSimEntriesForSms();
+-                    break;
+ 
+                 case EVENT_SET_VOICE_SUBSCRIPTION:
+                     if (!mHasTuneAway) {
+-- 
+1.8.5.2 (Apple Git-48)
+
