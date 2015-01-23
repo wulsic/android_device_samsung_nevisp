@@ -227,7 +227,7 @@ struct lge_power_module HAL_MODULE_INFO_SYM = {
             version_major: 1,
             version_minor: 0,
             id: POWER_HARDWARE_MODULE_ID,
-            name: "Corsica Power HAL",
+            name: "Nevisp Power HAL",
             author: "The CyanogenMod Project",
             methods: &power_module_methods,
         },

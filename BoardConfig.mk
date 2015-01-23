@@ -47,15 +47,6 @@ TARGET_ARCH_VARIANT_FPU := neon
 # Skip droiddoc build to save build time
 BOARD_SKIP_ANDROID_DOC_BUILD := true
 
-# Enable dex-preoptimization to speed up first boot sequence
-ifeq ($(HOST_OS),linux)
-  ifeq ($(TARGET_BUILD_VARIANT),user)
-    ifeq ($(WITH_DEXPREOPT),)
-      WITH_DEXPREOPT := true
-    endif
-  endif
-endif
-
 # Add h/w acceleration in browser
 ENABLE_WEBGL := true
 WITH_JIT := true

@@ -35,7 +35,7 @@ extern "C" void destroyAudioPolicyManager(AudioPolicyInterface *interface)
 void AudioPolicyManager::setPhoneState(int state)
 {
     if (!isStateInCall(mPhoneState) && isStateInCall(state)) {
-		// On Corsica, we need to reset mLastVoiceVolume every call start to force the
+		// On Nevisp, we need to reset mLastVoiceVolume every call start to force the
 		// volume to be always set since the HAL sometimes forget about it
         ALOGV("Resetting mLastVoiceVolume");
         mLastVoiceVolume = -1.0f;
