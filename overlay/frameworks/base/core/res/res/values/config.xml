@@ -199,4 +199,8 @@
     <!-- Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">8</integer>
 
+    <!-- Indicate whether the SD card is accessible without removing the battery. -->
+    <bool name="config_batterySdCardAccessibility">true</bool>
+
+
 </resources>
