@@ -52,13 +52,6 @@ PRODUCT_COPY_FILES += \
 	device/samsung/nevisp/keylayouts/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl \
         device/samsung/nevisp/keylayouts/lpm.rc:root/lpm.rc \
 
-# Screen
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=160 \
-    ro.sf.display_rotation=0 \
-    ro.lcd_brightness=170 \
-    ro.lcd_min_brightness=30
-
 # Stagefright
 PRODUCT_PROPERTY_OVERRIDES += \
         media.stagefright.enable-player=true \
