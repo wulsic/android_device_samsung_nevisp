@@ -1,4 +1,3 @@
-BOARD_VENDOR := samsung
 USE_CAMERA_STUB := true
 
 # legacy MMAP 
