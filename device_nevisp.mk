@@ -7,7 +7,7 @@ $(call inherit-product-if-exists, vendor/samsung/nevisp/nevisp-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/samsung/nevisp/overlay
 
-# LDPI assets
+# MDPI assets
 PRODUCT_AAPT_CONFIG := normal ldpi mdpi nodpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
 #$(call inherit-product, device/mdpi-common/mdpi.mk)
