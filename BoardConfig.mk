@@ -1,4 +1,4 @@
-BOARD_VENDOR := Samsung
+BOARD_VENDOR := samsung
 USE_CAMERA_STUB := true
 
 # legacy MMAP 
@@ -12,7 +12,7 @@ BOARD_USES_ALSA_AUDIO := true
 
 TARGET_ARCH := arm
 TARGET_NO_BOOTLOADER := true
-TARGET_BOOTLOADER_BOARD_NAME := nevisp
+TARGET_BOOTLOADER_BOARD_NAME := rhea
 TARGET_BOARD_PLATFORM := rhea
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
@@ -70,7 +70,7 @@ TARGET_PROVIDES_POWER_HAL := true
 #TARGET_KERNEL_SOURCE := kernel/samsung/nevisp
 #TARGET_KERNEL_CONFIG := cyanogenmod_nevisp_defconfig
 TARGET_PREBUILT_KERNEL := device/samsung/nevisp/kernel
-BOARD_KERNEL_CMDLINE := console=ttyS0,115200n8 mem=456M androidboot.console=ttyS0 gpt v3d_mem=67108864 pmem=24M@0x9E800000
+BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 mem=456M androidboot.console=ttyS1 gpt v3d_mem=67108864 pmem=24M@0x9E800000
 BOARD_KERNEL_BASE := 0x82000000
 BOARD_KERNEL_PAGESIZE := 4096
 
@@ -82,8 +82,8 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 939524096
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2236070912
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-# Include an expanded selection of fonts
-EXTENDED_FONT_FOOTPRINT := true
+# Use a smaller subset of system fonts to keep image size lower
+SMALLER_FONT_FOOTPRINT := true
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_LARGE_FILESYSTEM := true
@@ -154,7 +154,7 @@ BOARD_RIL_CLASS := ../../../device/samsung/nevisp/ril/
 
 # Recovery
 TARGET_RECOVERY_FSTAB := device/samsung/nevisp/recovery/fstab.rhea_ss_nevisp
-BOARD_LDPI_RECOVERY := true
+BOARD_MDPI_RECOVERY := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := "<font_7x16.h>"
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/nevisp/recovery/recovery_keys.c
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
