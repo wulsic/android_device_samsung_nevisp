@@ -22,9 +22,6 @@ else
 LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
 
-PRODUCT_COPY_FILES := \
-    $(LOCAL_KERNEL):kernel
-
 # Init files
 PRODUCT_COPY_FILES += \
 	device/samsung/nevisp/recovery/init.rhea_ss_nevisp.rc:root/init.rhea_ss_nevisp.rc \
