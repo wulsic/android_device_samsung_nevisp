@@ -16,12 +16,6 @@ PRODUCT_AAPT_PREF_CONFIG := mdpi
 TARGET_SCREEN_HEIGHT := 480
 TARGET_SCREEN_WIDTH := 320
 
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/samsung/nevisp/kernel
-else
-LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
-
 # Init files
 PRODUCT_COPY_FILES += \
 	device/samsung/nevisp/recovery/init.rhea_ss_nevisp.rc:root/init.rhea_ss_nevisp.rc \
