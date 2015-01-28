@@ -18,8 +18,8 @@ index 3bb1c80..8bafbac 100644
  #endif
          }
      }
-+// Capri's OMX fail to set a reasonable default size from width and height
-+#ifdef CAPRI_HWC
++// RHEA's OMX fail to set a reasonable default size from width and height
++#ifdef RHEA_HWC
 +    else if (!strncmp(mComponentName, "OMX.brcm.video.decoder.", 21)) {
 +        int32_t width;
 +        int32_t height;
