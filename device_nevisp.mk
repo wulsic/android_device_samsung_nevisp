@@ -26,13 +26,26 @@ PRODUCT_COPY_FILES += \
         device/samsung/nevisp/recovery/init.recovery.rhea_ss_nevisp.rc:root/init.recovery.rhea_ss_nevisp.rc \
 	device/samsung/nevisp/recovery/fstab.rhea_ss_nevisp:root/fstab.rhea_ss_nevisp 
 
+# Prebuilt Kernel Related Stuff
+LOCAL_KERNEL := device/samsung/nevisp/kernel/zImage
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_KERNEL):kernel \
+    device/samsung/nevisp/kernel/ansi_cprng.ko:system/lib/modules/ansi_cprng.ko \
+    device/samsung/nevisp/kernel/dhd.ko:system/lib/modules/dhd.ko \
+    device/samsung/nevisp/kernel/frandom.ko:system/lib/modules/frandom.ko \
+    device/samsung/nevisp/kernel/gspca_main.ko:system/lib/modules/gspca_main.ko \
+    device/samsung/nevisp/kernel/lcd.ko:system/lib/modules/lcd.ko \
+    device/samsung/nevisp/kernel/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
+    device/samsung/nevisp/prebuilt/00frandom:system/etc/init.d/00frandom
+
 PRODUCT_COPY_FILES += \
         frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
         frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
         frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
         frameworks/av/media/libstagefright/data/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
         device/samsung/nevisp/prebuilt/media_codecs.xml:system/etc/media_codecs.xml \
-        device/samsung/nevisp/prebuilt/media_profiles.xml:system/etc/media_profiles.xml \
+        device/samsung/nevisp/prebuilt/media_profiles.xml:system/etc/media_profiles.xml
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
@@ -41,7 +54,7 @@ PRODUCT_COPY_FILES += \
 	device/samsung/nevisp/keylayouts/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
 	device/samsung/nevisp/keylayouts/Generic.kl:system/usr/keylayout/Generic.kl \
 	device/samsung/nevisp/keylayouts/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl \
-        device/samsung/nevisp/keylayouts/lpm.rc:root/lpm.rc \
+        device/samsung/nevisp/keylayouts/lpm.rc:root/lpm.rc
 
 # Stagefright
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -69,7 +82,7 @@ PRODUCT_PACKAGES += \
         audio.primary.rhea \
         audio.policy.rhea \
         libaudio-resampler \
-        hwprops \
+        hwprops
 
 # Device-specific packages
 PRODUCT_PACKAGES += \
@@ -96,7 +109,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
 	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
 	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
+	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
 
 # Support for Browser's saved page feature. This allows
 # for pages saved on previous versions of the OS to be
@@ -112,7 +125,7 @@ PRODUCT_PACKAGES += \
     dhcpcd.conf \
     wpa_supplicant \
     wpa_supplicant.conf \
-    hostapad \
+    hostapad
 
 # These are the hardware-specific settings that are stored in system properties.
 # Note that the only such settings should be the ones that are too low-level to
@@ -179,11 +192,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.speaker=false \
     af.resampler.quality=4
 
+# Disable SELinux since it needs some more configuration
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.boot.selinux=disabled \
+    ro.build.selinux=0
+
 # Override phone-hdpi-512-dalvik-heap to match value on stock
 # - helps pass CTS com.squareup.okhttp.internal.spdy.Spdy3Test#tooLargeDataFrame)
 # (property override must come before included property)
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.heapgrowthlimit=56m \
+    dalvik.vm.heapgrowthlimit=56m
 
 # Dalvik heap config
 include frameworks/native/build/phone-hdpi-512-dalvik-heap.mk

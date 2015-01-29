@@ -66,12 +66,14 @@ BOARD_USE_LEGACY_TOUCHSCREEN := true
 TARGET_PROVIDES_POWER_HAL := true
 
 # Kernel
-TARGET_KERNEL_SOURCE := kernel/samsung/nevisp
-TARGET_KERNEL_CONFIG := cyanogenmod_nevisp_defconfig
-#TARGET_PREBUILT_KERNEL := device/samsung/nevisp/kernel
+#TARGET_KERNEL_SOURCE := kernel/samsung/nevisp
+#TARGET_KERNEL_CONFIG := cyanogenmod_nevisp_defconfig
 BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 mem=456M androidboot.console=ttyS1 gpt v3d_mem=67108864 pmem=24M@0x9E800000
 BOARD_KERNEL_BASE := 0x82000000
 BOARD_KERNEL_PAGESIZE := 4096
+
+# Prebuilt kernel
+TARGET_PREBUILT_KERNEL := device/samsung/nevisp/kernel/zImage
 
 TARGET_USERIMAGES_USE_EXT4 := true
 
