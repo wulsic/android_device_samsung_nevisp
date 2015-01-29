@@ -81,8 +81,8 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 939524096
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2236070912
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-# Use a smaller subset of system fonts to keep image size lower
-SMALLER_FONT_FOOTPRINT := true
+# Include an expanded selection of fonts
+EXTENDED_FONT_FOOTPRINT := true
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_LARGE_FILESYSTEM := true
