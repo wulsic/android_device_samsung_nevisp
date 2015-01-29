@@ -31,11 +31,11 @@ LOCAL_KERNEL := device/samsung/nevisp/kernel/zImage
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel \
-    device/samsung/nevisp/kernel/ansi_cprng.ko:system/lib/modules/ansi_cprng.ko \
-    device/samsung/nevisp/kernel/dhd.ko:system/lib/modules/dhd.ko \
-    device/samsung/nevisp/kernel/gspca_main.ko:system/lib/modules/gspca_main.ko \
-    device/samsung/nevisp/kernel/lcd.ko:system/lib/modules/lcd.ko \
-    device/samsung/nevisp/kernel/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko
+    device/samsung/nevisp/kernel/modules/ansi_cprng.ko:system/lib/modules/ansi_cprng.ko \
+    device/samsung/nevisp/kernel/modules/dhd.ko:system/lib/modules/dhd.ko \
+    device/samsung/nevisp/kernel/modules/gspca_main.ko:system/lib/modules/gspca_main.ko \
+    device/samsung/nevisp/kernel/modules/lcd.ko:system/lib/modules/lcd.ko \
+    device/samsung/nevisp/kernel/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko
 
 PRODUCT_COPY_FILES += \
         frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
