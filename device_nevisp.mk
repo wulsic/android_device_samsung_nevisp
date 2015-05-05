@@ -23,7 +23,7 @@ PRODUCT_COPY_FILES += \
 	device/samsung/nevisp/recovery/init.log.rc:root/init.log.rc \
 	device/samsung/nevisp/recovery/init.bt.rc:root/init.bt.rc \
 	device/samsung/nevisp/recovery/ueventd.rhea_ss_nevisp.rc:root/ueventd.rhea_ss_nevisp.rc \
-        device/samsung/nevisp/recovery/init.recovery.rhea_ss_nevisp.rc:root/init.recovery.rhea_ss_nevisp.rc \
+    device/samsung/nevisp/recovery/init.recovery.rhea_ss_nevisp.rc:root/init.recovery.rhea_ss_nevisp.rc \
 	device/samsung/nevisp/recovery/fstab.rhea_ss_nevisp:root/fstab.rhea_ss_nevisp 
 
 # Prebuilt Kernel Related Stuff
@@ -38,12 +38,8 @@ PRODUCT_COPY_FILES += \
     device/samsung/nevisp/kernel/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko
 
 PRODUCT_COPY_FILES += \
-        device/samsung/nevisp/prebuilt/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
-        device/samsung/nevisp/prebuilt/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
-        device/samsung/nevisp/prebuilt/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
-        device/samsung/nevisp/prebuilt/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
-        device/samsung/nevisp/prebuilt/media_codecs.xml:system/etc/media_codecs.xml \
-        device/samsung/nevisp/prebuilt/media_profiles.xml:system/etc/media_profiles.xml
+        device/samsung/nevisp/configs/media_codecs.xml:system/etc/media_codecs.xml \
+        device/samsung/nevisp/configs/media_profiles.xml:system/etc/media_profiles.xml
 
 # Multisim-toggle app © Shubhang Rathore
 PRODUCT_COPY_FILES += \
@@ -56,7 +52,7 @@ PRODUCT_COPY_FILES += \
 	device/samsung/nevisp/keylayouts/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
 	device/samsung/nevisp/keylayouts/Generic.kl:system/usr/keylayout/Generic.kl \
 	device/samsung/nevisp/keylayouts/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl \
-        device/samsung/nevisp/keylayouts/lpm.rc:root/lpm.rc
+    device/samsung/nevisp/keylayouts/lpm.rc:root/lpm.rc
 
 # Stagefright
 PRODUCT_PROPERTY_OVERRIDES += \
