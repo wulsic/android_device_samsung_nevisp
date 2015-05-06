@@ -1,7 +1,7 @@
 From 9638be6431975288a94a757be3921707166b34fa Mon Sep 17 00:00:00 2001
 From: Shubhang Rathore <shubhang92@gmail.com>
 Date: Fri, 25 Jul 2014 22:15:29 +0530
-Subject: [PATCH] i9082: fix HW composer related issues
+Subject: [PATCH] S6810: fix HW composer related issues
 
 Rebased on pawitp's patches
 

@@ -1,7 +1,7 @@
 From 44dee519bd09ed06ecc66b5bd7984c2d9bcf8901 Mon Sep 17 00:00:00 2001
 From: Pawit Pornkitprasan <p.pawit@gmail.com>
 Date: Sat, 8 Mar 2014 19:34:18 +0700
-Subject: [PATCH] Settings: MSim: remove settings not used on I9082
+Subject: [PATCH] Settings: MSim: remove settings not used on S6810
 
 Change-Id: Ic33db5e60db34cf707116082b1f738918b3a395f
 ---
