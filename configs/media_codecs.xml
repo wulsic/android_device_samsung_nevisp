@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright (C) 2012 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -77,13 +77,12 @@ Only the three quirks included above are recognized at this point:
 
 <MediaCodecs>
     <Decoders>
-        <!-- Video Hardware -->
+
         <MediaCodec name="OMX.brcm.video.mpeg4.decoder" type="video/mp4v-es" />
         <MediaCodec name="OMX.brcm.video.h263.decoder" type="video/3gpp" />
         <MediaCodec name="OMX.brcm.video.h264.decoder" type="video/avc" />
         <MediaCodec name="OMX.brcm.video.vpx.decoder" type="video/x-vnd.on2.vp8" />
-		
-        <!-- Audio Software -->
+
         <MediaCodec name="OMX.google.mp3.decoder" type="audio/mpeg" />
         <MediaCodec name="OMX.google.amrnb.decoder" type="audio/3gpp" />
         <MediaCodec name="OMX.google.amrwb.decoder" type="audio/amr-wb" />
@@ -97,7 +96,13 @@ Only the three quirks included above are recognized at this point:
         <MediaCodec name="OMX.google.h263.decoder" type="video/3gpp" />
         <MediaCodec name="OMX.google.h264.decoder" type="video/avc" />
         <MediaCodec name="OMX.google.vpx.decoder" type="video/x-vnd.on2.vp8"/>
-		
+
+        <MediaCodec name="OMX.google.mpeg4.decoder" type="video/mp4v-es" />
+        <MediaCodec name="OMX.google.h263.decoder" type="video/3gpp" />
+        <MediaCodec name="OMX.google.h264.decoder" type="video/avc" />
+        <MediaCodec name="OMX.google.vp8.decoder" type="video/x-vnd.on2.vp8" />
+        <MediaCodec name="OMX.google.vp9.decoder" type="video/x-vnd.on2.vp9" />
+
         <!--  ffmpeg audio codecs  -->
         <MediaCodec name="OMX.ffmpeg.ra.decoder" type="audio/vnd.rn-realaudio" />
         <MediaCodec name="OMX.ffmpeg.flac.decoder" type="audio/flac" />
@@ -122,7 +127,6 @@ Only the three quirks included above are recognized at this point:
     </Decoders>
 
     <Encoders>
-	    <!-- Video Hardware -->
         <MediaCodec name="OMX.brcm.video.mpeg4.encoder" type="video/mp4v-es" />        
         <MediaCodec name="OMX.brcm.video.h263.encoder" type="video/3gpp" />
         <MediaCodec name="OMX.brcm.video.h264.encoder" type="video/avc" />
@@ -132,6 +136,13 @@ Only the three quirks included above are recognized at this point:
         <MediaCodec name="OMX.google.amrnb.encoder" type="audio/3gpp" />
         <MediaCodec name="OMX.google.amrwb.encoder" type="audio/amr-wb" />
 	<MediaCodec name="OMX.google.aac.encoder" type="audio/mp4a-latm" />
+
+        <MediaCodec name="OMX.google.amrnb.encoder" type="audio/3gpp" />
+        <MediaCodec name="OMX.google.amrwb.encoder" type="audio/amr-wb" />
+        <MediaCodec name="OMX.google.aac.encoder" type="audio/mp4a-latm" />
         <MediaCodec name="OMX.google.flac.encoder" type="audio/flac" />
+        <MediaCodec name="OMX.google.vp8.encoder" type="video/x-vnd.on2.vp8" />
     </Encoders>
+    <Include href="media_codecs_google_video.xml" />
+    <Include href="media_codecs_ffmpeg.xml" />
 </MediaCodecs>
