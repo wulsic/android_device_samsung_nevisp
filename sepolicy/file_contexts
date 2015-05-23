@@ -1,5 +1,5 @@
 # Graphics
-/dev/v3d                                            u:object_r:powervr_device:s0
-/dev/pmem                                           u:object_r:powervr_device:s0
-/dev/bralloc_mem                                    u:object_r:powervr_device:s0
-/dev/vce                                            u:object_r:powervr_device:s0
+/dev/v3d                                            u:object_r:gpu_device:s0
+/dev/pmem                                           u:object_r:gpu_device:s0
+/dev/bralloc_mem                                    u:object_r:gpu_device:s0
+/dev/vce                                            u:object_r:gpu_device:s0
