@@ -56,7 +56,6 @@ PRODUCT_COPY_FILES += \
 	device/samsung/nevisp/keylayouts/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
 	device/samsung/nevisp/keylayouts/Generic.kl:system/usr/keylayout/Generic.kl \
 	device/samsung/nevisp/keylayouts/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl \
-        device/samsung/nevisp/recovery/lpm.rc:root/lpm.rc
 
 # Stagefright
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -92,7 +91,6 @@ PRODUCT_PACKAGES += \
 	
 # Charger
 PRODUCT_PACKAGES += \
-	charger \
 	charger_res_images
 
 # These are the hardware-specific features
