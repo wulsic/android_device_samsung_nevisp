@@ -9,6 +9,9 @@ BOARD_USES_ALSA_AUDIO := true
 # inherit from the proprietary version
 -include vendor/samsung/nevisp/BoardConfigVendor.mk
 
+# Legacy MMAP for pre-lollipop blobs
+BOARD_USES_LEGACY_MMAP := true
+
 TARGET_ARCH := arm
 TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := rhea
@@ -187,9 +190,9 @@ BOARD_SEPOLICY_DIRS += \
 
 BOARD_SEPOLICY_UNION += \
     file_contexts \
-    surfaceflinger.te \
-    init.te \
-    shell.te \
-    netd.te \
     device.te \
-    rild.te \ 
+    init.te \
+    netd.te \
+    ril.te \
+    shell.te \
+    surfaceflinger.te
