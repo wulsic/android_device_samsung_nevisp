@@ -177,6 +177,9 @@ BOARD_HAL_STATIC_LIBRARIES := libhealthd.rhea
 # CMHW
 BOARD_HARDWARE_CLASS := hardware/samsung/cmhw/ device/samsung/nevisp/cmhw/
 
+# jemalloc causes a lot of random crash on free()
+MALLOC_IMPL := dlmalloc
+
 # Compat
 TARGET_USES_LOGD := false
 
