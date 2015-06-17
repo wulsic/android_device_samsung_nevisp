@@ -17,20 +17,24 @@
 
 
 #include <stdint.h>
-#include <stdbool.h>
+#include <sys/types.h>
+#include <AudioPolicyManager.h>
 
-#include <hardware_legacy/AudioPolicyManagerBase.h>
+#ifndef ANDROID_RHEA_AUDIO_POLICY_MANAGER_H
+#define ANDROID_RHEA_AUDIO_POLICY_MANAGER_H
 
-namespace android_audio_legacy {
+namespace android {
 
-class AudioPolicyManager: public AudioPolicyManagerBase
+class RheaAudioPolicyManager: public AudioPolicyManager
+
 {
-
 public:
-                AudioPolicyManager(AudioPolicyClientInterface *clientInterface)
-                : AudioPolicyManagerBase(clientInterface) {}
+    RheaAudioPolicyManager(AudioPolicyClientInterface *clientInterface);
+    virtual ~RheaAudioPolicyManager() {}
 
-        virtual ~AudioPolicyManager() {}
-        virtual void setPhoneState(int state);
+    virtual void setPhoneState(audio_mode_t state);
+
 };
-};
+
+}  // namespace android
+#endif  // ANDROID_RHEA_AUDIO_POLICY_MANAGER_H
