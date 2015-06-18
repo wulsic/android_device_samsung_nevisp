@@ -193,7 +193,7 @@ BOARD_SEPOLICY_UNION += \
     device.te \
     init.te \
     netd.te \
-    ril.te \
+    rild.te \
     shell.te \
     surfaceflinger.te
 
