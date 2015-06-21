@@ -228,7 +228,7 @@ struct lge_power_module HAL_MODULE_INFO_SYM = {
             version_minor: 0,
             id: POWER_HARDWARE_MODULE_ID,
             name: "Nevisp Power HAL",
-            author: "The CyanogenMod Project",
+            author: "The Omnirom Project",
             methods: &power_module_methods,
         },
 

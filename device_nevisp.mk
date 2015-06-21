@@ -139,7 +139,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.zygote.disable_gl_preload=true \
     ro.telephony.call_ring.multiple=0 \
     ro.telephony.call_ring=0 \
-    ro.cm.hardware.cabc=/sys/class/mdnie/mdnie/cabc \
+    ro.omni.hardware.cabc=/sys/class/mdnie/mdnie/cabc \
     persist.radio.multisim.config=none
 
 # Disable JIT code cache to free up some ram when the device is running
