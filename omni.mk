@@ -4,15 +4,18 @@ $(call inherit-product, vendor/omni/config/telephony.mk)
 # Release name
 PRODUCT_RELEASE_NAME := GalaxyFame
 
-# Inherit some common OMNI stuff.
-$(call inherit-product, vendor/omni/config/common_full_phone.mk)
+# Inherit Omni GSM telephony parts
+$(call inherit-product, vendor/omni/config/gsm.mk)
 
-# Inherit device configuration
-$(call inherit-product, device/samsung/nevisp/device_nevisp.mk)
+# Inherit some common Omni stuff
+$(call inherit-product, vendor/omni/config/common.mk)
+
+# Inherit from the common Open Source product configuration
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := nevisp
-PRODUCT_NAME := cm_nevisp
+PRODUCT_NAME := omni_nevisp
 PRODUCT_BRAND := samsung
 PRODUCT_MODEL := GT-S6810P
 PRODUCT_MANUFACTURER := samsung
