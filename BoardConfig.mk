@@ -127,7 +127,6 @@ BOARD_NO_APSME_ATTR := true
 # Hardware rendering
 USE_OPENGL_RENDERER := true
 HWUI_COMPILE_FOR_PERF := true
-BOARD_EGL_CFG := device/samsung/nevisp/configs/egl.cfg
 BOARD_USE_MHEAP_SCREENSHOT := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
