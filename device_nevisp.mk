@@ -38,11 +38,11 @@ PRODUCT_COPY_FILES += \
     device/samsung/nevisp/kernel/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko
 
 PRODUCT_COPY_FILES += \
-        device/samsung/nevisp/prebuilt/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
-        device/samsung/nevisp/prebuilt/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
-        device/samsung/nevisp/prebuilt/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
-        device/samsung/nevisp/prebuilt/media_codecs.xml:system/etc/media_codecs.xml \
-        device/samsung/nevisp/prebuilt/media_profiles.xml:system/etc/media_profiles.xml
+	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+	frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
+	frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
+        device/samsung/nevisp/media_codecs.xml:system/etc/media_codecs.xml \
+        device/samsung/nevisp/media_profiles.xml:system/etc/media_profiles.xml
 
 # Multisim-toggle app © Shubhang Rathore
 PRODUCT_COPY_FILES += \
