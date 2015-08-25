@@ -1,2 +1,4 @@
 allow init block_device:blk_file setattr;
+allow init radio_device:blk_file setattr;
+
 allow init self:capability sys_module;

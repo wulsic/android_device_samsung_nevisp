@@ -1,2 +1,0 @@
-# allow netd access to /proc
-allow rild proc:file write;

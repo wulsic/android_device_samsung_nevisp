@@ -1,0 +1,4 @@
+allow kernel device:blk_file { create setattr };
+allow kernel self:capability mknod;
+
+allow kernel cam_block_device:blk_file rw_file_perms;
