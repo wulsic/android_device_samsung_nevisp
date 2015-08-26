@@ -18,4 +18,4 @@ PRODUCT_MODEL := GT-S6810P
 PRODUCT_MANUFACTURER := samsung
 
 #Set build fingerprint / ID / Prduct Name ect.
-PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=nevisp TARGET_DEVICE=nevisp BUILD_FINGERPRINT=samsung/nevispxx/nevisp:4.1.2/JZO54K/S6810PXXAMJ1:user/release-keys PRIVATE_BUILD_DESC="nevisp-user 4.1.2 JZO54K S6810PXXAMJ1 release-keys"
+PRODUCT_BUILD_PROP_OVERRIDES += TARGET_DEVICE=nevisp BUILD_FINGERPRINT=samsung/nevispxx/nevisp:4.1.2/JZO54K/S6810PXXAMJ1:user/release-keys PRIVATE_BUILD_DESC="nevisp-user 4.1.2 JZO54K S6810PXXAMJ1 release-keys"
