@@ -12,23 +12,8 @@ on init
     mount tmpfs tmpfs /tmp
     chmod 1775 /tmp
 
-    # See storage config details at http://source.android.com/tech/storage/
-    mkdir /mnt/shell/emulated 0700 shell shell
-    mkdir /storage/emulated 0555 root root
-
-    export EXTERNAL_STORAGE /storage/emulated/legacy
-    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
-    export EMULATED_STORAGE_TARGET /storage/emulated
-
-    # Support legacy paths
-    symlink /storage/emulated/legacy /sdcard
-    symlink /storage/emulated/legacy /mnt/sdcard
-    symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
-
-    export SECONDARY_STORAGE /storage/sdcard1
-    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
-    mkdir /storage/sdcard1 0700 root root
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0
 
     symlink /efs /factory
 
@@ -38,12 +23,10 @@ on init
     stop ril-daemon
 
 on post-fs-data
-    # we will remap this as /storage/sdcard with the sdcard fuse tool
-    mkdir /data/media 0770 media_rw media_rw
-    chown media_rw media_rw /data/media
-
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
+
+    restorecon_recursive /sys/devices/system/cpu/cpufreq/ondemand
 
     #for wifi
     mkdir /efs/wifi 0775 radio system
@@ -286,7 +269,6 @@ on boot
 
 on fs
     mount_all /fstab.rhea_ss_nevisp
-    setprop ro.crypto.fuse_sdcard true
 
 # For NV Read/Write 
 	chown radio system /dev/block/mmcblk0p18    
@@ -364,13 +346,6 @@ service rhea-ril-daemon /system/bin/rild
     socket rild-debug stream 660 radio system
     user root
     group radio cache inet misc audio system sdcard_rw log sdcard_r
-
-# create virtual SD card at /storage/sdcard, based on the /data/media directory
-# daemon will drop to user/group system/media_rw after initializing
-# underlying files in /data/media will be created with user and group media_rw (1023)
-service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
-    class late_start
-    oneshot
 
 service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
@@ -476,12 +451,6 @@ on property:dev.bootcomplete=1
     write /sys/module/rhea_pwr_mgr/parameters/pm_late_init 1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
     write /sys/block/mmcblk0/queue/scheduler cfq
-
-# fusewrapped external sdcard daemon running as media_rw (1023)
-service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
-    class late_start
-    oneshot
-    disabled
 
 # GSM/HSDPA data Workaroud
 on property:gsm.defaultpdpcontext.active=true
