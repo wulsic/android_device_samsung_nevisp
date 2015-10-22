@@ -206,17 +206,21 @@ BOARD_SEPOLICY_UNION += \
     vclmk.te
 
 #TWRP Recovery
-#RECOVERY_VARIANT := twrp
 #DEVICE_RESOLUTION := 320x480
 #TARGET_PREBUILT_RECOVERY_KERNEL := device/samsung/nevisp/kernel/zImage
 #TARGET_RECOVERY_FSTAB = device/samsung/nevisp/recovery/twrp.fstab
-#RECOVERY_GRAPHICS_USE_LINELENGTH := true
+#HAVE_SELINUX := true
+#TW_THEME := portrait_mdpi
+#TW_FLASH_FROM_STORAGE := true
 #RECOVERY_SDCARD_ON_DATA := true
 #BOARD_HAS_NO_REAL_SDCARD := true
 #TW_INTERNAL_STORAGE_PATH := "/data/media"
 #TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
 #TW_EXTERNAL_STORAGE_PATH := "/sdcard"
 #TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard"
+#TW_INCLUDE_CRYPTO := true
+#TW_IGNORE_MAJOR_AXIS_0 := true
+#TW_DEFAULT_EXTERNAL_STORAGE := true
+#TW_SCREEN_BLANK_ON_BOOT := true
 #TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
 #TW_MAX_BRIGHTNESS := 255
-#TWRP_EVENT_LOGGING := false
