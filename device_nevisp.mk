@@ -167,7 +167,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ## Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.force_highendgfx=1
-    
+    dalvik.vm.dex2oat-filter=interpret-only \
+    dalvik.vm.image-dex2oat-filter=speed
+
 # KSM
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.ksm.default=1
