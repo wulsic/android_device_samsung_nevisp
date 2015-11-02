@@ -183,6 +183,9 @@ MALLOC_IMPL := dlmalloc
 # Compat
 TARGET_USES_LOGD := false
 
+# SkTextBox for libtvout
+BOARD_USES_SKTEXTBOX := true
+
 # SELinux
 BOARD_SEPOLICY_DIRS += \
     device/samsung/nevisp/sepolicy
