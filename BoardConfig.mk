@@ -76,7 +76,7 @@ BOARD_KERNEL_BASE := 0x82000000
 BOARD_KERNEL_PAGESIZE := 4096
 
 # Prebuilt kernel
-#TARGET_PREBUILT_KERNEL := device/samsung/nevisp/kernel/zImage
+TARGET_PREBUILT_KERNEL := device/samsung/nevisp/kernel/zImage
 
 #File System
 TARGET_USERIMAGES_USE_EXT4 := true
