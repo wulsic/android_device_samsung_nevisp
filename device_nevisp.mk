@@ -29,7 +29,7 @@ PRODUCT_COPY_FILES += \
 
 # Prebuilt Kernel Related Stuff
 #LOCAL_KERNEL := device/samsung/nevisp/kernel/zImage
-#
+
 #PRODUCT_COPY_FILES += \
 #    $(LOCAL_KERNEL):kernel \
 #    device/samsung/nevisp/kernel/modules/ansi_cprng.ko:system/lib/modules/ansi_cprng.ko \

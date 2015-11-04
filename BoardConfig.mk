@@ -70,13 +70,13 @@ TARGET_PROVIDES_POWER_HAL := true
 
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/samsung/nevisp
-#TARGET_KERNEL_CONFIG := cyanogenmod_nevisp_defconfig
+TARGET_KERNEL_CONFIG := cyanogenmod_nevisp_defconfig
 BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 mem=456M androidboot.console=ttyS1 gpt v3d_mem=67108864 pmem=24M@0x9E800000
 BOARD_KERNEL_BASE := 0x82000000
 BOARD_KERNEL_PAGESIZE := 4096
 
 # Prebuilt kernel
-TARGET_PREBUILT_KERNEL := device/samsung/nevisp/kernel/zImage
+#TARGET_PREBUILT_KERNEL := device/samsung/nevisp/kernel/zImage
 
 #File System
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -210,21 +210,21 @@ BOARD_SEPOLICY_UNION += \
     vclmk.te
 
 #TWRP Recovery
-#DEVICE_RESOLUTION := 320x480
-#TARGET_PREBUILT_RECOVERY_KERNEL := device/samsung/nevisp/kernel/zImage
-#TARGET_RECOVERY_FSTAB = device/samsung/nevisp/recovery/twrp.fstab
-#HAVE_SELINUX := true
-#TW_THEME := portrait_mdpi
-#TW_FLASH_FROM_STORAGE := true
-#RECOVERY_SDCARD_ON_DATA := true
-#BOARD_HAS_NO_REAL_SDCARD := true
-#TW_INTERNAL_STORAGE_PATH := "/data/media"
-#TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
-#TW_EXTERNAL_STORAGE_PATH := "/sdcard"
-#TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard"
-#TW_INCLUDE_CRYPTO := true
-#TW_IGNORE_MAJOR_AXIS_0 := true
-#TW_DEFAULT_EXTERNAL_STORAGE := true
-#TW_SCREEN_BLANK_ON_BOOT := true
-#TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
-#TW_MAX_BRIGHTNESS := 255
+DEVICE_RESOLUTION := 320x480
+TARGET_PREBUILT_RECOVERY_KERNEL := device/samsung/nevisp/kernel/zImage
+TARGET_RECOVERY_FSTAB = device/samsung/nevisp/recovery/twrp.fstab
+HAVE_SELINUX := true
+TW_THEME := portrait_mdpi
+TW_FLASH_FROM_STORAGE := true
+RECOVERY_SDCARD_ON_DATA := true
+BOARD_HAS_NO_REAL_SDCARD := true
+TW_INTERNAL_STORAGE_PATH := "/data/media"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+TW_EXTERNAL_STORAGE_PATH := "/sdcard"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard"
+TW_INCLUDE_CRYPTO := true
+TW_IGNORE_MAJOR_AXIS_0 := true
+TW_DEFAULT_EXTERNAL_STORAGE := true
+TW_SCREEN_BLANK_ON_BOOT := true
+TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
+TW_MAX_BRIGHTNESS := 255
