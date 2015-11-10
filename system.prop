@@ -20,7 +20,7 @@ ro.product.max_num_touch=2
 service.brcm.fm.start_snr=41
 service.brcm.fm.stop_snr=20
 
-ro.tvout.enable=false
+ro.tvout.enable=true
 
 net.streaming.rtsp.uaprof=http://wap.samsungmobile.com/uaprof/
 
