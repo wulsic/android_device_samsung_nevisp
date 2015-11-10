@@ -1,7 +1,7 @@
 Samsung-Galaxy-Fame- & Duos (S6810/S6812)
 ==============================================
 
-Cyanogenmod 11 device tree for Samsung S6810/S6812
+Cyanogenmod 12.1 device tree for Samsung S6810/S6812
 
 ==============================================
 
