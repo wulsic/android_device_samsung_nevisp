@@ -228,7 +228,4 @@
 
     <!-- Indicate whether the SD card is accessible without removing the battery. -->
     <bool name="config_batterySdCardAccessibility">true</bool>
-
-    <!-- Support Miracast -->
-    <bool name="config_enableWifiDisplay">true</bool>
 </resources>
