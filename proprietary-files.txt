@@ -16,7 +16,6 @@ bin/rild
 bin/p2p_supplicant
 bin/wlandutservice
 etc/asound.conf
-etc/audio_policy.conf
 etc/DiamondVoice.txt
 etc/gps/glconfig.xml
 etc/gps.conf
