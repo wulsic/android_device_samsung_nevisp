@@ -3,9 +3,6 @@ USE_CAMERA_STUB := true
 # legacy MMAP 
 BOARD_USES_LEGACY_MMAP := true
 
-# Audio
-BOARD_USES_ALSA_AUDIO := true
-
 # inherit from the proprietary version
 -include vendor/samsung/nevisp/BoardConfigVendor.mk
 
@@ -30,6 +27,9 @@ ARCH_ARM_HAVE_NEON := true
 
 TARGET_ARCH_LOWMEM := true
 TARGET_BOOTLOADER_BOARD_NAME := rhea
+# cortex-a9 is used to take advantage of NEON optimizations
+TARGET_ARCH_VARIANT_CPU := cortex-a9
+TARGET_ARCH_VARIANT_FPU := neon
 
 # Optimisations
 #TARGET_USE_SCORPIAN_BIONIC_OPTIMIZATION := true
@@ -42,9 +42,15 @@ TARGET_BOOTLOADER_BOARD_NAME := rhea
 #TARGET_GRALLOC_USES_ASHMEM := true
 #BOARD_WANTS_EMMC_BOOT := true
 
-# cortex-a9 is used to take advantage of NEON optimizations
-TARGET_ARCH_VARIANT_CPU := cortex-a9
-TARGET_ARCH_VARIANT_FPU := neon
+# Audio
+BOARD_USES_ALSA_AUDIO := true
+AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
+AUDIO_FEATURE_SAMSUNG_DUAL_SIM := true
+
+# Radio
+SIM_COUNT := 2
+TARGET_GLOBAL_CFLAGS += -DANDROID_MULTI_SIM
+TARGET_GLOBAL_CPPFLAGS += -DANDROID_MULTI_SIM
 
 # Skip droiddoc build to save build time
 #BOARD_SKIP_ANDROID_DOC_BUILD := true

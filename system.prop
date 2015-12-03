@@ -5,8 +5,18 @@ persist.brcm.log=none
 persist.brcm.cp_crash=none
 persist.brcm.ap_crash=none
 
+#RIL
 rild.libpath=/system/lib/libbrcm_ril.so
 #rild.libargs=-d /dev/ttyS0
+ro.telephony.ril_class=SamsungBCMRIL
+persist.radio.multisim.config=dsds
+ro.telephony.call_ring.multiple=0
+ro.telephony.call_ring=0
+ro.multisim.simslotcount=2
+ro.multisim.set_audio_params=true
+ro.ril.hsxpa=1
+ro.ril.gprsclass=10
+
 ro.sf.lcd_density=160
 ro.lcd_brightness=170
 ro.lcd_min_brightness=30
@@ -32,8 +42,6 @@ debug.hwui.render_dirty_regions=false
 brcm.graphics.async_errors=true
 brcm.hwc.no-hdmi-trans=1
 
-ro.ril.hsxpa=1
-ro.ril.gprsclass=10
 ro.com.google.gmsversion=4.1_r4
 
 # Camera
