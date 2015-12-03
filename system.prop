@@ -1,9 +1,6 @@
 #
 # system.prop for nevisp
 #
-persist.brcm.log=none
-persist.brcm.cp_crash=none
-persist.brcm.ap_crash=none
 
 #RIL
 rild.libpath=/system/lib/libbrcm_ril.so
@@ -31,11 +28,14 @@ ro.product.multi_touch_enabled=true
 ro.product.max_num_touch=2
 
 # system prop for FM Radio SNR
-#
 service.brcm.fm.start_snr=41
 service.brcm.fm.stop_snr=20
 
+#Misc
 ro.tvout.enable=true
+persist.brcm.log=none
+persist.brcm.cp_crash=none
+persist.brcm.ap_crash=none
 
 net.streaming.rtsp.uaprof=http://wap.samsungmobile.com/uaprof/
 
