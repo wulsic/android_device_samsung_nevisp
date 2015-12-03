@@ -147,7 +147,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=0 \
     ro.telephony.call_ring=0 \
     ro.cm.hardware.cabc=/sys/class/mdnie/mdnie/cabc \
-    persist.radio.multisim.config=none
+    persist.radio.multisim.config=dsds
 
 # Disable JIT code cache to free up some ram when the device is running
 PRODUCT_PROPERTY_OVERRIDES += \
