@@ -413,7 +413,7 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
 # TODO: btld is only used for FM
 
 service macloader /system/bin/macloader
-	class main
+	class late_start
 	oneshot
 
 # GSM/HSDPA data workaround
