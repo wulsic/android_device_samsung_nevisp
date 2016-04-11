@@ -118,20 +118,20 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
 	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
 	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml\
-frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
+#frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
 
 # NFC
-PRODUCT_PACKAGES += \
-	libnfc \
-	libnfc_jni \
-	Nfc \
-	Tag
-
+#PRODUCT_PACKAGES += \
+#	libnfc \
+#	libnfc_jni \
+#	Nfc \
+#	Tag
+#
 # NFC EXTRAS add-on API
-PRODUCT_PACKAGES += \
-	com.android.nfc_extras
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml
+#PRODUCT_PACKAGES += \
+#	com.android.nfc_extras
+#PRODUCT_COPY_FILES += \
+#	frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml
 
 # Support for Browser's saved page feature. This allows
 # for pages saved on previous versions of the OS to be
