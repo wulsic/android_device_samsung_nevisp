@@ -1,0 +1,8 @@
+#
+# system.prop for nevisp
+#
+
+ro.sf.lcd_density=160
+ro.lcd_brightness=170
+ro.lcd_min_brightness=20
+
