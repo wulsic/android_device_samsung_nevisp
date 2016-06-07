@@ -111,6 +111,7 @@ lib/libcontrolcsc.so
 lib/libdeblock.so		
 lib/libsoundalive.so		
 lib/libsoundspeed.so	
+lib/libstagefrighthw.so
 lib/lib_SoundAlive_for_ICS_V01013a.so	
 lib/libSoundAlive_VSP_ver312a.so
 lib/libOMX.brcm.audio.aac.decoder.so		

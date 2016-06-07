@@ -16,5 +16,6 @@
 /dev/block/mmcblk0p10   /preload            ext4      defaults                                              recoveryonly
 
 # Vold
-/devices/platform/sdhci.0/mmc_host/mmc2 auto    auto  defaults                                            voldmanaged=sdcard1:auto,noemulatedsd
+/devices/platform/sdhci.0/mmc_host/mmc2     auto    auto  defaults                                            voldmanaged=sdcard1:auto,noemulatedsd
+
 

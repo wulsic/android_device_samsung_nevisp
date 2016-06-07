@@ -285,7 +285,7 @@ on boot
 	insmod /system/lib/modules/VoiceSolution.ko
 
 on fs
-    mount_all /fstab.rhea
+    mount_all /fstab.rhea_ss_nevisp
     setprop ro.crypto.fuse_sdcard true
 
 # For NV Read/Write 
