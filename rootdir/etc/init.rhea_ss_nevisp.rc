@@ -8,6 +8,8 @@ on early-init
 
 on init
 
+    write /sys/fs/selinux/enforce 0
+
     mkdir /tmp
     mount tmpfs tmpfs /tmp
     chmod 1775 /tmp
