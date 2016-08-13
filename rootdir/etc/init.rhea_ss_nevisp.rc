@@ -433,6 +433,9 @@ service gpsd /system/bin/glgps -c /system/etc/gps/glconfig.xml
     class late_start
     user gps
     group system sdcard_rw inet root radio wifi
+    
+# Setup the global environment  
+    export LD_SHIM_LIBS /system/lib/hw/camera.rhea.so|libcamera_symbols.so
 
 # Run ATX over UART
 service console /system/bin/atx -l -d
