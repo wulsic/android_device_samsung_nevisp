@@ -14,7 +14,6 @@ on init
     mount tmpfs tmpfs /tmp
     chmod 1775 /tmp
 
-    symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
 
     symlink /efs /factory
