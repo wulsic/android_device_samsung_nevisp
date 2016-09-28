@@ -320,6 +320,16 @@ on fs
     chown system system /sys/class/sec/sec_touchkey/touchkey_threshold
     chmod 0660 /sys/class/sec/sec_touchkey/touchkey_threshold
 
+    # Configure UKSM
+    chown root system /sys/kernel/mm/uksm/sleep_millisecs
+    chmod 0664 /sys/kernel/mm/uksm/sleep_millisecs
+    write /sys/kernel/mm/uksm/sleep_millisecs 500
+
+    # Configure KSM
+    write /sys/kernel/mm/ksm/pages_to_scan 100
+    write /sys/kernel/mm/ksm/sleep_millisecs 500
+    write /sys/kernel/mm/ksm/run 1
+
 on post-fs
     chown radio system /efs
     chmod 0771 /efs
