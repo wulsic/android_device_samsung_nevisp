@@ -122,6 +122,7 @@ on boot
     chown system radio /sys/class/sensors/magnetic_sensor/name
 
     mount debugfs /sys/kernel/debug /sys/kernel/debug
+    chmod 0755 /sys/kernel/debug
 
 # required so RIL can open kernel RPC drivers
     chmod 0660 /dev/bcm_rpc
