@@ -6,6 +6,8 @@ on early-init
 
     mkdir /efs 0771 radio system
 
+    mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
+
 on init
 
     write /sys/fs/selinux/enforce 0
@@ -371,6 +373,7 @@ service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
     class main
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
+    group system wakelock
     oneshot
 
 service p2p_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
@@ -411,7 +414,7 @@ service gpsd /system/bin/glgps -c /system/etc/gps/glconfig.xml
      setenv LD_PRELOAD /system/lib/libglgps-compat.so
     class late_start
     user gps
-    group system sdcard_rw inet root radio wifi
+    group system wakelock sdcard_rw inet root radio wifi
     
 # Setup the global environment  
     export LD_SHIM_LIBS /system/lib/hw/camera.rhea.so|libcamera_symbols.so
